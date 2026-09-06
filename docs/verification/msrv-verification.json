@@ -1,0 +1,13 @@
+{
+  "name": "msrv-verification",
+  "command": [
+    "env",
+    "RUSTUP_TOOLCHAIN=1.85.0",
+    "bash",
+    "scripts/verify.sh"
+  ],
+  "cwd": "/workspace/scratch/9b3fa4aeffd8/work/veritasm-github",
+  "utc": "2026-09-06T04:06:00.890571+00:00",
+  "exit_code": 101,
+  "seconds": 148.36
+}

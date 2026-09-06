@@ -1,0 +1,35 @@
+{
+  "descriptor_schema_version": "2.0",
+  "artifact": "evaluation_truth/origins.tsv",
+  "artifact_schema_version": "2.0",
+  "format": "tsv",
+  "encoding": "UTF-8",
+  "line_ending": "LF",
+  "final_newline": true,
+  "delimiter": "TAB",
+  "header": true,
+  "empty_data_rows_allowed": true,
+  "columns": [
+    { "name": "schema_version", "type": "literal", "value": "2.0" },
+    { "name": "fragment_ordinal", "type": "u64_decimal" },
+    { "name": "read_id", "type": "opaque_ascii_identifier" },
+    { "name": "mate_role", "type": "enum", "values": ["S", "R1", "R2"] },
+    { "name": "molecule_id", "type": "truth_molecule_identifier" },
+    { "name": "topology", "type": "enum", "values": ["linear", "circular"] },
+    { "name": "strand", "type": "enum", "values": ["+", "-"] },
+    { "name": "first_truth_base_zero_based", "type": "u64_decimal" },
+    { "name": "truth_step", "type": "enum", "values": ["1", "-1"] },
+    { "name": "read_length", "type": "u64_decimal" },
+    { "name": "outer_fragment_start_zero_based", "type": "u64_decimal" },
+    { "name": "outer_fragment_span", "type": "u64_decimal" },
+    { "name": "wraps_origin", "type": "boolean" },
+    { "name": "pre_error_sequence_sha256", "type": "lowercase_sha256" },
+    { "name": "observed_sequence_sha256", "type": "lowercase_sha256" },
+    {
+      "name": "quality_phred_sequence_sha256",
+      "type": "lowercase_sha256",
+      "description": "SHA-256 of decoded numeric Phred values in observed-read order."
+    }
+  ],
+  "sort_key": ["fragment_ordinal numeric", "mate_role S before R1 before R2"]
+}

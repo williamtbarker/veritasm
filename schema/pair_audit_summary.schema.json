@@ -1,0 +1,65 @@
+{
+  "descriptor_schema_version": "1.0",
+  "artifact": "pair_audit_summary.tsv",
+  "artifact_schema_version": "1.0",
+  "format": "tsv",
+  "encoding": "UTF-8",
+  "line_ending": "LF",
+  "final_newline": true,
+  "delimiter": "TAB",
+  "header": true,
+  "missing_value": null,
+  "columns": [
+    { "name": "schema_version", "type": "literal", "value": "1.0" },
+    { "name": "k", "type": "u8_decimal", "minimum": "3", "maximum": "63" },
+    {
+      "name": "state",
+      "type": "ordered_enum",
+      "values": [
+        "remap_not_requested",
+        "mate_ineligible",
+        "mate_indeterminate_candidate_limit",
+        "mate_unmapped",
+        "mate_multiple_placement_groups",
+        "same_linear_unitig",
+        "endpoint_tie",
+        "cross_unitig_observation",
+        "not_paired_input"
+      ]
+    },
+    { "name": "supplied_fragment_instances", "type": "u64_decimal", "minimum": "0" }
+  ],
+  "conditional_row_sets": [
+    {
+      "when": "paired_input_and_remap_disabled",
+      "states_in_exact_order": ["remap_not_requested"],
+      "count_constraint": "The sole count equals all paired supplied fragment instances."
+    },
+    {
+      "when": "paired_input_and_remap_enabled",
+      "states_in_exact_order": [
+        "mate_ineligible",
+        "mate_indeterminate_candidate_limit",
+        "mate_unmapped",
+        "mate_multiple_placement_groups",
+        "same_linear_unitig",
+        "endpoint_tie",
+        "cross_unitig_observation"
+      ],
+      "count_constraint": "All seven rows, including zeros, are present and their counts sum to all paired supplied fragment instances."
+    },
+    {
+      "when": "single_end_input",
+      "states_in_exact_order": ["not_paired_input"],
+      "count_constraint": "The sole count equals all single-end supplied fragment instances."
+    }
+  ],
+  "file_constraints": [
+    "The literal header and column order are the columns array order.",
+    "States are mutually exclusive and the applicable conditional row set is exhaustive.",
+    "The cross_unitig_observation count equals the sum of supplied_fragment_instances in pair_links.tsv when that state is present."
+  ],
+  "sort_key": [
+    { "field": "state", "comparison": "applicable_conditional_row_set_order", "direction": "ascending" }
+  ]
+}

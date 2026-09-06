@@ -1,0 +1,15 @@
+{
+  "name": "msrv-validation-schema",
+  "command": [
+    "cargo",
+    "+1.85.0",
+    "test",
+    "--locked",
+    "--test",
+    "validation_schema"
+  ],
+  "cwd": "/workspace/scratch/9b3fa4aeffd8/work/veritasm-github",
+  "utc": "2026-09-06T04:14:33.728585+00:00",
+  "exit_code": 0,
+  "seconds": 1.8
+}

@@ -1,0 +1,103 @@
+name: Fuzz smoke tests
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  fuzz:
+    name: ${{ matrix.target }}
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - target: fastx
+            max_len: 65536
+          - target: gzip
+            max_len: 65536
+          - target: paired
+            max_len: 65536
+          - target: spool
+            max_len: 16384
+          - target: count_run
+            max_len: 16384
+          - target: bundle_manifest
+            max_len: 16384
+          - target: bundle
+            max_len: 4096
+    steps:
+      - uses: actions/checkout@93cb6efe18208431cddfb8368fd83d5badbf9bfd # v5.0.1
+      - uses: dtolnay/rust-toolchain@6c977a6ca4077a0ceb28ffbe03f59d46e9ac8772 # master, pinned 2026-09-03
+        with:
+          toolchain: nightly-2026-08-18
+      - name: Install cargo-fuzz
+        run: cargo install cargo-fuzz --version 0.13.2 --locked
+      - name: Record frozen fuzz toolchain identities
+        run: |
+          set -euo pipefail
+          evidence_dir="fuzz/evidence/${{ matrix.target }}"
+          mkdir -p "$evidence_dir"
+          {
+            rustc +nightly-2026-08-18 -vV
+            cargo +nightly-2026-08-18 -V
+            cargo fuzz --version
+            git rev-parse HEAD
+            sha256sum Cargo.toml Cargo.lock fuzz/Cargo.toml fuzz/Cargo.lock
+          } | tee "$evidence_dir/toolchain-and-source.txt"
+      - name: Compile fuzz target
+        run: |
+          set -euo pipefail
+          cargo +nightly-2026-08-18 fuzz check ${{ matrix.target }} \
+            2>&1 | tee "fuzz/evidence/${{ matrix.target }}/compile.log"
+      - name: Record input corpus identity
+        run: |
+          set -euo pipefail
+          evidence_dir="fuzz/evidence/${{ matrix.target }}"
+          mkdir -p "$evidence_dir"
+          find "fuzz/corpus/${{ matrix.target }}" -type f -print0 \
+            | LC_ALL=C sort -z \
+            | xargs -0 sha256sum > "$evidence_dir/corpus-before.sha256"
+          sha256sum "$evidence_dir/corpus-before.sha256" \
+            > "$evidence_dir/corpus-before.manifest.sha256"
+      - name: Run bounded fuzz target
+        run: |
+          set -o pipefail
+          set +e
+          cargo +nightly-2026-08-18 fuzz run ${{ matrix.target }} \
+            "fuzz/corpus/${{ matrix.target }}" -- \
+            -max_total_time=60 \
+            -max_len=${{ matrix.max_len }} \
+            -timeout=5 \
+            -detect_leaks=1 \
+            -print_final_stats=1 \
+            2>&1 | tee "fuzz/evidence/${{ matrix.target }}/fuzzer.log"
+          fuzz_status=${PIPESTATUS[0]}
+          set -e
+          printf '%s\n' "$fuzz_status" \
+            > "fuzz/evidence/${{ matrix.target }}/exit-code.txt"
+          exit "$fuzz_status"
+      - name: Record resulting corpus identity
+        if: always()
+        run: |
+          set -euo pipefail
+          evidence_dir="fuzz/evidence/${{ matrix.target }}"
+          find "fuzz/corpus/${{ matrix.target }}" -type f -print0 \
+            | LC_ALL=C sort -z \
+            | xargs -0 sha256sum > "$evidence_dir/corpus-after.sha256"
+          sha256sum "$evidence_dir/corpus-after.sha256" \
+            > "$evidence_dir/corpus-after.manifest.sha256"
+      - name: Preserve bounded fuzz evidence
+        if: always()
+        uses: actions/upload-artifact@b7c566a772e6b6bfb58ed0dc250532a479d7789f # v6.0.0
+        with:
+          name: fuzz-${{ matrix.target }}-evidence
+          path: |
+            fuzz/evidence/${{ matrix.target }}
+            fuzz/artifacts/${{ matrix.target }}
+            fuzz/corpus/${{ matrix.target }}
+          if-no-files-found: error
+          retention-days: 30

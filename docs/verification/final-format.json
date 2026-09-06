@@ -1,0 +1,14 @@
+{
+  "name": "final-format",
+  "command": [
+    "cargo",
+    "fmt",
+    "--all",
+    "--",
+    "--check"
+  ],
+  "cwd": "/workspace/scratch/9b3fa4aeffd8/work/veritasm-github",
+  "utc": "2026-09-06T04:02:41.044937+00:00",
+  "exit_code": 0,
+  "seconds": 2.13
+}

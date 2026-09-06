@@ -1,0 +1,7 @@
+case_id	replicate	master_seed_hex	fragments	truth_length	read_length	insert_length	substitution_rate_ppm	low_quality_rate_ppm	compression
+linear-se	0	18c9415808bbd749e6a02b8d9888a9a697318e67705667a66f7f167a9d466c05	200	2000	100	250	0	0	plain
+linear-pe	0	d336abbb940e8623037f95a5abb97077883f3f49a5191c593de27c7f30a49a15	200	2000	100	250	0	0	plain
+circular-pe	0	84ccb802a81d7c3b7367d72d23dc115c856ad5ce075fde4fd5d20a454823285d	200	2000	100	250	0	0	plain
+mixture-pe	0	001e0672374918bc17ebc164b24c78bbc13ada0cb930d5dd899d1230c36d6bcb	200	2000	100	250	0	0	plain
+error-pe	0	824927abfec602b7559345ea7d922889e9f2b97d40f976d0af62bca5b03f430a	200	2000	100	250	20000	20000	plain
+qc-censoring-control	0	872ea662debc3f27404548d86c26aa7c232429f84c0899f393fc768bea3bc28d	200	2000	100	250	20000	0	plain

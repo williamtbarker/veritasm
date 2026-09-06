@@ -1,0 +1,219 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://veritasm.invalid/schema/validation-dataset-v2.json",
+  "title": "VeritAsm truth-known validation dataset v2",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "dataset_id",
+    "tier",
+    "role",
+    "case_id",
+    "replicate_decimal",
+    "generator",
+    "assembler_input",
+    "evaluation_truth",
+    "files",
+    "limitations"
+  ],
+  "properties": {
+    "schema_version": { "const": "veritasm-validation-dataset-v2" },
+    "dataset_id": { "type": "string", "pattern": "^v4-[0-9a-f]{64}$" },
+    "tier": { "const": "tier_1_truth_known_computational" },
+    "role": { "type": "string", "minLength": 1 },
+    "case_id": {
+      "enum": ["linear-se", "linear-pe", "circular-pe", "mixture-pe", "error-pe", "qc-censoring-control"]
+    },
+    "replicate_decimal": { "$ref": "#/$defs/u64" },
+    "generator": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "name",
+        "version",
+        "plan_version",
+        "rng_name",
+        "rng_byte_order",
+        "seed_hex",
+        "seed_source",
+        "rng_streams",
+        "parameters"
+      ],
+      "properties": {
+        "name": { "const": "veritasm-simulate" },
+        "version": { "const": "4" },
+        "plan_version": { "const": "veritasm-validation-v1" },
+        "rng_name": { "const": "sha256-counter-v1" },
+        "rng_byte_order": { "const": "counter_u64_le_output_words_u64_le" },
+        "seed_hex": { "$ref": "#/$defs/sha256" },
+        "seed_source": { "enum": ["explicit", "sha256_plan_case_replicate"] },
+        "rng_streams": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "derivation",
+            "layout_seed_hex",
+            "error_seed_hex",
+            "quality_seed_hex",
+            "quality_seed_source"
+          ],
+          "properties": {
+            "derivation": { "const": "sha256-domain-separated-stream-v1" },
+            "layout_seed_hex": { "$ref": "#/$defs/sha256" },
+            "error_seed_hex": { "$ref": "#/$defs/sha256" },
+            "quality_seed_hex": { "$ref": "#/$defs/sha256" },
+            "quality_seed_source": { "enum": ["explicit", "derived_from_master_seed"] }
+          }
+        },
+        "parameters": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "fragments_decimal",
+            "truth_length_decimal",
+            "read_length_decimal",
+            "insert_length_decimal",
+            "substitution_rate_ppm_decimal",
+            "low_quality_rate_ppm_decimal",
+            "error_model",
+            "quality_model",
+            "default_quality_phred_decimal",
+            "low_quality_phred_decimal",
+            "mixture_minor_fragment_fraction",
+            "library_orientation",
+            "output_compression"
+          ],
+          "properties": {
+            "fragments_decimal": { "$ref": "#/$defs/u64" },
+            "truth_length_decimal": { "$ref": "#/$defs/positive_u64" },
+            "read_length_decimal": { "$ref": "#/$defs/positive_u64" },
+            "insert_length_decimal": { "$ref": "#/$defs/u64" },
+            "substitution_rate_ppm_decimal": { "$ref": "#/$defs/u64" },
+            "low_quality_rate_ppm_decimal": { "$ref": "#/$defs/u64" },
+            "error_model": { "const": "independent_substitution_bernoulli_per_observed_base_v1" },
+            "quality_model": {
+              "enum": [
+                "independent_bernoulli_q10_else_q40_v1",
+                "qc_censoring_substitution_q10_else_q40_v1"
+              ]
+            },
+            "default_quality_phred_decimal": { "const": "40" },
+            "low_quality_phred_decimal": { "const": "10" },
+            "mixture_minor_fragment_fraction": { "type": "string", "minLength": 1 },
+            "library_orientation": { "type": "string", "minLength": 1 },
+            "output_compression": { "enum": ["plain", "gzip"] }
+          }
+        }
+      }
+    },
+    "assembler_input": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "mode",
+        "fragments_decimal",
+        "reads_decimal",
+        "manifest_path",
+        "read_paths",
+        "contract"
+      ],
+      "properties": {
+        "mode": { "enum": ["single_end", "paired_end"] },
+        "fragments_decimal": { "$ref": "#/$defs/u64" },
+        "reads_decimal": { "$ref": "#/$defs/u64" },
+        "manifest_path": { "const": "assembler_input/input_manifest.json" },
+        "read_paths": {
+          "type": "array",
+          "minItems": 1,
+          "maxItems": 2,
+          "items": { "$ref": "#/$defs/relative_path" }
+        },
+        "contract": { "type": "string", "minLength": 1 }
+      }
+    },
+    "evaluation_truth": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "namespace",
+        "fasta_path",
+        "origins_path",
+        "errors_path",
+        "quality_events_path",
+        "coordinate_system",
+        "molecules"
+      ],
+      "properties": {
+        "namespace": { "const": "evaluation_only" },
+        "fasta_path": { "const": "evaluation_truth/truth.fasta" },
+        "origins_path": { "const": "evaluation_truth/origins.tsv" },
+        "errors_path": { "const": "evaluation_truth/errors.tsv" },
+        "quality_events_path": { "const": "evaluation_truth/quality_events.tsv" },
+        "coordinate_system": {
+          "const": "zero_based_truth_coordinates; strand gives +1/-1 traversal and negative-strand read bases complement truth; circular coordinates are modulo molecule length"
+        },
+        "molecules": {
+          "type": "array",
+          "minItems": 1,
+          "items": { "$ref": "#/$defs/molecule" }
+        }
+      }
+    },
+    "files": {
+      "type": "array",
+      "minItems": 6,
+      "items": { "$ref": "#/$defs/file" },
+      "x-sort-key": "path unsigned-byte lexicographic ascending"
+    },
+    "limitations": {
+      "type": "array",
+      "minItems": 1,
+      "items": { "type": "string", "minLength": 1 }
+    }
+  },
+  "x-invariants": [
+    "dataset_id is v4- plus SHA-256 over the frozen domain and ordered length-prefixed generator identity, RNG/seed, case, replicate, model, library, and output-compression parameters; enforced by veritasm-evaluate",
+    "manifest.sha256 is the exact canonical sorted inventory of dataset.json plus every files record, and generated read roles use only reads_SE.fastq[.gz] or reads_R1/reads_R2.fastq[.gz] under assembler_input; enforced by veritasm-evaluate",
+    "veritasm-evaluate parses and semantically reconciles declared FASTQ, origins.tsv, errors.tsv, quality_events.tsv, truth FASTA, case contract, and generator parameters after byte-length and SHA-256 verification"
+  ],
+  "$defs": {
+    "sha256": { "type": "string", "pattern": "^[0-9a-f]{64}$" },
+    "u64": { "type": "string", "pattern": "^(0|[1-9][0-9]*)$" },
+    "positive_u64": { "type": "string", "pattern": "^[1-9][0-9]*$" },
+    "relative_path": {
+      "type": "string",
+      "pattern": "^(?!.*(?:^|/)\\.{1,2}(?:/|$))(?:[A-Za-z0-9._-]+/)*[A-Za-z0-9._-]+$"
+    },
+    "file": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["path", "role", "visibility", "bytes_decimal", "sha256"],
+      "properties": {
+        "path": { "$ref": "#/$defs/relative_path" },
+        "role": { "type": "string", "minLength": 1 },
+        "visibility": { "enum": ["assembler_input", "evaluation_only"] },
+        "bytes_decimal": { "$ref": "#/$defs/u64" },
+        "sha256": { "$ref": "#/$defs/sha256" }
+      }
+    },
+    "molecule": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "molecule_id",
+        "truth_class",
+        "topology",
+        "length_bases_decimal",
+        "sequence_sha256"
+      ],
+      "properties": {
+        "molecule_id": { "type": "string", "pattern": "^[A-Za-z0-9._-]+$" },
+        "truth_class": { "enum": ["primary", "minor"] },
+        "topology": { "enum": ["linear", "circular"] },
+        "length_bases_decimal": { "$ref": "#/$defs/positive_u64" },
+        "sequence_sha256": { "$ref": "#/$defs/sha256" }
+      }
+    }
+  }
+}

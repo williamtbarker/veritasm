@@ -1,0 +1,386 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://veritasm.invalid/schema/validation-result-v4.json",
+  "title": "VeritAsm truth-known evaluation result v4",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "evaluation_id",
+    "evaluator",
+    "inputs",
+    "status",
+    "assembly",
+    "base_metrics",
+    "junction_metrics",
+    "junction_evidence",
+    "per_molecule",
+    "raw_alignments_sha256",
+    "raw_junctions_sha256",
+    "limitations"
+  ],
+  "properties": {
+    "schema_version": { "const": "veritasm-validation-result-v4" },
+    "evaluation_id": { "type": "string", "pattern": "^eval-[0-9a-f]{64}$" },
+    "evaluator": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "name",
+        "version",
+        "alignment_algorithm",
+        "junction_algorithm",
+        "max_edit_rate_ppm_decimal",
+        "max_dp_cells_decimal",
+        "max_exact_alignment_scan_bases_decimal",
+        "exact_alignment_scan_bases_decimal",
+        "max_junction_comparisons_decimal",
+        "junction_key_comparisons_decimal",
+        "max_junction_flank_length_decimal",
+        "max_junction_index_bytes_decimal",
+        "junction_index_execution_status",
+        "junction_index_projected_bytes_decimal",
+        "junction_index_capacity_bytes_decimal",
+        "max_junction_evidence_bytes_decimal",
+        "max_exact_alignment_prefix_bytes_decimal",
+        "max_dataset_manifest_bytes_decimal",
+        "max_dataset_artifact_bytes_decimal",
+        "max_truth_fasta_bytes_decimal",
+        "max_assembly_fasta_bytes_decimal",
+        "max_truth_evidence_replay_bytes_decimal",
+        "projected_truth_evidence_replay_bytes_decimal",
+        "tie_breaking"
+      ],
+      "properties": {
+        "name": { "const": "veritasm-evaluate" },
+        "version": { "const": "4" },
+        "alignment_algorithm": { "const": "exact_compatible_coordinate_bounds_with_primary_alignment_diagnostic_v3" },
+        "junction_algorithm": { "const": "exact_packed_window_occurrence_index_v2" },
+        "max_edit_rate_ppm_decimal": { "$ref": "#/$defs/u64" },
+        "max_dp_cells_decimal": { "$ref": "#/$defs/positive_u64" },
+        "max_exact_alignment_scan_bases_decimal": { "$ref": "#/$defs/positive_u64" },
+        "exact_alignment_scan_bases_decimal": { "$ref": "#/$defs/u64" },
+        "max_junction_comparisons_decimal": { "$ref": "#/$defs/positive_u64" },
+        "junction_key_comparisons_decimal": { "$ref": "#/$defs/u64" },
+        "max_junction_flank_length_decimal": { "$ref": "#/$defs/positive_u64" },
+        "max_junction_index_bytes_decimal": { "$ref": "#/$defs/positive_u64" },
+        "junction_index_execution_status": {
+          "enum": [
+            "built",
+            "built_empty_truth_window_universe",
+            "not_required_no_eligible_adjacencies"
+          ]
+        },
+        "junction_index_projected_bytes_decimal": { "$ref": "#/$defs/u64" },
+        "junction_index_capacity_bytes_decimal": { "$ref": "#/$defs/u64" },
+        "max_junction_evidence_bytes_decimal": { "$ref": "#/$defs/positive_u64" },
+        "max_exact_alignment_prefix_bytes_decimal": { "$ref": "#/$defs/positive_u64" },
+        "max_dataset_manifest_bytes_decimal": { "$ref": "#/$defs/positive_u64" },
+        "max_dataset_artifact_bytes_decimal": { "$ref": "#/$defs/positive_u64" },
+        "max_truth_fasta_bytes_decimal": { "$ref": "#/$defs/positive_u64" },
+        "max_assembly_fasta_bytes_decimal": { "$ref": "#/$defs/positive_u64" },
+        "max_truth_evidence_replay_bytes_decimal": { "$ref": "#/$defs/positive_u64" },
+        "projected_truth_evidence_replay_bytes_decimal": { "$ref": "#/$defs/u64" },
+        "tie_breaking": { "type": "string", "minLength": 1 }
+      }
+    },
+    "inputs": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "dataset_id",
+        "dataset_manifest_sha256",
+        "dataset_content_root_sha256",
+        "dataset_binding",
+        "truth_fasta_sha256",
+        "assembly_fasta_sha256"
+      ],
+      "properties": {
+        "dataset_id": { "type": "string", "minLength": 1 },
+        "dataset_manifest_sha256": { "$ref": "#/$defs/sha256" },
+        "dataset_content_root_sha256": { "$ref": "#/$defs/sha256" },
+        "dataset_binding": { "$ref": "#/$defs/dataset_binding" },
+        "truth_fasta_sha256": { "$ref": "#/$defs/sha256" },
+        "assembly_fasta_sha256": { "$ref": "#/$defs/sha256" }
+      }
+    },
+    "status": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["code", "message"],
+      "properties": {
+        "code": { "enum": ["evaluation_complete", "evaluation_complete_empty_assembly"] },
+        "message": { "type": "string", "minLength": 1 }
+      }
+    },
+    "assembly": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "records_decimal",
+        "bases_decimal",
+        "accepted_alignment_records_decimal",
+        "unaligned_records_decimal",
+        "empty_output"
+      ],
+      "properties": {
+        "records_decimal": { "$ref": "#/$defs/u64" },
+        "bases_decimal": { "$ref": "#/$defs/u64" },
+        "accepted_alignment_records_decimal": { "$ref": "#/$defs/u64" },
+        "unaligned_records_decimal": { "$ref": "#/$defs/u64" },
+        "empty_output": { "type": "boolean" }
+      }
+    },
+    "base_metrics": { "$ref": "#/$defs/base_metrics" },
+    "junction_metrics": { "$ref": "#/$defs/junction_metrics" },
+    "junction_evidence": { "$ref": "#/$defs/junction_evidence" },
+    "per_molecule": {
+      "type": "array",
+      "minItems": 1,
+      "items": { "$ref": "#/$defs/molecule_metric" }
+    },
+    "raw_alignments_sha256": { "$ref": "#/$defs/sha256" },
+    "raw_junctions_sha256": { "$ref": "#/$defs/sha256" },
+    "limitations": {
+      "type": "array",
+      "minItems": 1,
+      "items": { "type": "string", "minLength": 1 }
+    }
+  },
+  "x-invariants": [
+    "evaluator.exact_alignment_scan_bases_decimal <= evaluator.max_exact_alignment_scan_bases_decimal",
+    "evaluator.junction_key_comparisons_decimal <= evaluator.max_junction_comparisons_decimal",
+    "evaluator.junction_index_capacity_bytes_decimal <= evaluator.junction_index_projected_bytes_decimal <= evaluator.max_junction_index_bytes_decimal",
+    "evaluator.projected_truth_evidence_replay_bytes_decimal <= evaluator.max_truth_evidence_replay_bytes_decimal",
+    "junction index status built requires nonzero eligible adjacencies, projected bytes, capacity bytes, and key comparisons; built_empty_truth_window_universe requires eligible adjacencies, the fixed empty-index allocation, and zero key comparisons; not_required_no_eligible_adjacencies requires all four to be zero",
+    "assembly.accepted_alignment_records_decimal + assembly.unaligned_records_decimal = assembly.records_decimal; records_decimal is zero iff bases_decimal is zero and empty_output is true; nonempty records imply records_decimal <= bases_decimal",
+    "status code and fixed message are evaluation_complete_empty_assembly iff assembly.records_decimal is zero, otherwise evaluation_complete",
+    "matches + mismatches + inserted + deleted = evaluated alignment columns; matches + mismatches + inserted + unaligned assembly bases = assembly bases; accepted and unaligned record counts have matching nonzero base domains and cannot exceed their bases",
+    "error-rate, consensus-accuracy, QV, compatible-recovery bounds, duplication availability, and per-molecule ratio numerators/denominators reconcile to their raw counts",
+    "junction correct + false + both indeterminate classes = eligible; eligible + short-flank = assembly adjacencies; primary/minor chimera <= false",
+    "junction_evidence.logical_rows_decimal = junction_metrics.eligible_adjacencies_decimal = emitted_rows_decimal + omitted_rows_decimal",
+    "all mode emits every logical row; non_correct omits exactly correct rows; summary emits zero rows and records all logical rows as omitted",
+    "every molecule has nonzero truth_bases_decimal and unique <= compatible lower <= compatible upper <= truth bases; per-molecule rows are byte-sorted by molecule ID and sum to global bounds",
+    "exact-unambiguous + exact-ambiguous + non-exact recovery rows = accepted alignments; any non-exact row makes compatible recovery unavailable; ambiguous exact or non-exact rows make duplication unavailable",
+    "assembly adjacencies = assembly bases - assembly records because every evaluated FASTA record is nonempty and linear",
+    "development_unbound has no expected content root and is qualification-ineligible; externally_bound requires expected content root equal to the observed root and is qualification-eligible",
+    "evaluation_id binds the parameter ID, dataset JSON digest, content root, binding state, truth and assembly digests, evaluator configuration, and junction-evidence mode",
+    "an empty assembly records zero exact-alignment scan work",
+    "junction_evidence.artifact_bytes_decimal <= evaluator.max_junction_evidence_bytes_decimal"
+  ],
+  "$defs": {
+    "sha256": { "type": "string", "pattern": "^[0-9a-f]{64}$" },
+    "u64": { "type": "string", "pattern": "^(0|[1-9][0-9]*)$" },
+    "positive_u64": { "type": "string", "pattern": "^[1-9][0-9]*$" },
+    "dataset_binding": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "mode",
+        "qualification_admission",
+        "expected_dataset_content_root_sha256"
+      ],
+      "properties": {
+        "mode": { "enum": ["development_unbound", "externally_bound"] },
+        "qualification_admission": {
+          "enum": ["ineligible_development_unbound", "eligible_externally_bound"]
+        },
+        "expected_dataset_content_root_sha256": {
+          "oneOf": [
+            { "$ref": "#/$defs/sha256" },
+            { "type": "null" }
+          ]
+        }
+      }
+    },
+    "ratio": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["numerator_decimal", "denominator_decimal", "value_decimal", "status"],
+      "properties": {
+        "numerator_decimal": { "$ref": "#/$defs/u64" },
+        "denominator_decimal": { "$ref": "#/$defs/u64" },
+        "value_decimal": {
+          "oneOf": [
+            { "type": "string", "pattern": "^[0-9]+\\.[0-9]{6}$" },
+            { "type": "null" }
+          ]
+        },
+        "status": { "type": "string", "minLength": 1 }
+      }
+    },
+    "qv": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "value_decimal",
+        "status",
+        "evaluated_columns_decimal",
+        "observed_errors_decimal"
+      ],
+      "properties": {
+        "value_decimal": {
+          "oneOf": [
+            { "type": "string", "pattern": "^-?[0-9]+\\.[0-9]{6}$" },
+            { "type": "null" }
+          ]
+        },
+        "status": {
+          "enum": ["measured", "lower_bound_zero_observed_errors", "not_available_no_aligned_bases"]
+        },
+        "evaluated_columns_decimal": { "$ref": "#/$defs/u64" },
+        "observed_errors_decimal": { "$ref": "#/$defs/u64" }
+      }
+    },
+    "base_metrics": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "alignment_metric_scope",
+        "matches_decimal",
+        "mismatches_decimal",
+        "inserted_bases_decimal",
+        "deleted_bases_decimal",
+        "evaluated_alignment_columns_decimal",
+        "unaligned_assembly_bases_decimal",
+        "error_rate",
+        "consensus_accuracy",
+        "qv",
+        "recovery",
+        "aligned_duplication_ratio"
+      ],
+      "properties": {
+        "alignment_metric_scope": { "const": "deterministic_primary_alignment_diagnostic_only" },
+        "matches_decimal": { "$ref": "#/$defs/u64" },
+        "mismatches_decimal": { "$ref": "#/$defs/u64" },
+        "inserted_bases_decimal": { "$ref": "#/$defs/u64" },
+        "deleted_bases_decimal": { "$ref": "#/$defs/u64" },
+        "evaluated_alignment_columns_decimal": { "$ref": "#/$defs/u64" },
+        "unaligned_assembly_bases_decimal": { "$ref": "#/$defs/u64" },
+        "error_rate": { "$ref": "#/$defs/ratio" },
+        "consensus_accuracy": { "$ref": "#/$defs/ratio" },
+        "qv": { "$ref": "#/$defs/qv" },
+        "recovery": { "$ref": "#/$defs/recovery_metrics" },
+        "aligned_duplication_ratio": { "$ref": "#/$defs/ratio" }
+      }
+    },
+    "recovery_metrics": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "compatible_placement_status",
+        "exact_unambiguous_alignment_records_decimal",
+        "exact_ambiguous_alignment_records_decimal",
+        "non_exact_alignment_records_decimal",
+        "truth_bases_decimal",
+        "unique_coordinate_covered_truth_bases_decimal",
+        "compatible_covered_truth_bases_lower_bound_decimal",
+        "compatible_covered_truth_bases_upper_bound_decimal",
+        "unique_coordinate_truth_genome_fraction",
+        "compatible_truth_genome_fraction_lower_bound",
+        "compatible_truth_genome_fraction_upper_bound"
+      ],
+      "properties": {
+        "compatible_placement_status": {
+          "enum": [
+            "complete_exact_compatible_placement_universe",
+            "not_available_non_exact_compatible_placement_universe"
+          ]
+        },
+        "exact_unambiguous_alignment_records_decimal": { "$ref": "#/$defs/u64" },
+        "exact_ambiguous_alignment_records_decimal": { "$ref": "#/$defs/u64" },
+        "non_exact_alignment_records_decimal": { "$ref": "#/$defs/u64" },
+        "truth_bases_decimal": { "$ref": "#/$defs/positive_u64" },
+        "unique_coordinate_covered_truth_bases_decimal": { "$ref": "#/$defs/u64" },
+        "compatible_covered_truth_bases_lower_bound_decimal": { "$ref": "#/$defs/u64" },
+        "compatible_covered_truth_bases_upper_bound_decimal": { "$ref": "#/$defs/u64" },
+        "unique_coordinate_truth_genome_fraction": { "$ref": "#/$defs/ratio" },
+        "compatible_truth_genome_fraction_lower_bound": { "$ref": "#/$defs/ratio" },
+        "compatible_truth_genome_fraction_upper_bound": { "$ref": "#/$defs/ratio" }
+      }
+    },
+    "junction_metrics": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "flank_length_decimal",
+        "assembly_adjacencies_decimal",
+        "eligible_adjacencies_decimal",
+        "correct_decimal",
+        "false_decimal",
+        "indeterminate_ambiguous_flank_decimal",
+        "indeterminate_unmapped_flank_decimal",
+        "not_evaluated_short_flank_decimal",
+        "primary_minor_chimera_decimal"
+      ],
+      "properties": {
+        "flank_length_decimal": { "$ref": "#/$defs/positive_u64" },
+        "assembly_adjacencies_decimal": { "$ref": "#/$defs/u64" },
+        "eligible_adjacencies_decimal": { "$ref": "#/$defs/u64" },
+        "correct_decimal": { "$ref": "#/$defs/u64" },
+        "false_decimal": { "$ref": "#/$defs/u64" },
+        "indeterminate_ambiguous_flank_decimal": { "$ref": "#/$defs/u64" },
+        "indeterminate_unmapped_flank_decimal": { "$ref": "#/$defs/u64" },
+        "not_evaluated_short_flank_decimal": { "$ref": "#/$defs/u64" },
+        "primary_minor_chimera_decimal": { "$ref": "#/$defs/u64" }
+      }
+    },
+    "junction_evidence": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "mode",
+        "logical_rows_decimal",
+        "emitted_rows_decimal",
+        "omitted_rows_decimal",
+        "omitted_correct_rows_decimal",
+        "logical_rows_sha256",
+        "artifact_bytes_decimal"
+      ],
+      "properties": {
+        "mode": { "enum": ["all", "non_correct", "summary"] },
+        "logical_rows_decimal": { "$ref": "#/$defs/u64" },
+        "emitted_rows_decimal": { "$ref": "#/$defs/u64" },
+        "omitted_rows_decimal": { "$ref": "#/$defs/u64" },
+        "omitted_correct_rows_decimal": { "$ref": "#/$defs/u64" },
+        "logical_rows_sha256": { "$ref": "#/$defs/sha256" },
+        "artifact_bytes_decimal": { "$ref": "#/$defs/positive_u64" }
+      }
+    },
+    "molecule_metric": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "molecule_id",
+        "truth_class",
+        "topology",
+        "truth_bases_decimal",
+        "compatible_placement_status",
+        "unique_coordinate_covered_bases_decimal",
+        "compatible_covered_bases_lower_bound_decimal",
+        "compatible_covered_bases_upper_bound_decimal",
+        "unique_coordinate_truth_genome_fraction",
+        "compatible_truth_genome_fraction_lower_bound",
+        "compatible_truth_genome_fraction_upper_bound"
+      ],
+      "properties": {
+        "molecule_id": { "type": "string", "minLength": 1 },
+        "truth_class": { "enum": ["primary", "minor"] },
+        "topology": { "enum": ["linear", "circular"] },
+        "truth_bases_decimal": { "$ref": "#/$defs/positive_u64" },
+        "compatible_placement_status": {
+          "enum": [
+            "complete_exact_compatible_placement_universe",
+            "not_available_non_exact_compatible_placement_universe"
+          ]
+        },
+        "unique_coordinate_covered_bases_decimal": { "$ref": "#/$defs/u64" },
+        "compatible_covered_bases_lower_bound_decimal": { "$ref": "#/$defs/u64" },
+        "compatible_covered_bases_upper_bound_decimal": { "$ref": "#/$defs/u64" },
+        "unique_coordinate_truth_genome_fraction": { "$ref": "#/$defs/ratio" },
+        "compatible_truth_genome_fraction_lower_bound": { "$ref": "#/$defs/ratio" },
+        "compatible_truth_genome_fraction_upper_bound": { "$ref": "#/$defs/ratio" }
+      }
+    }
+  }
+}

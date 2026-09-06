@@ -1,0 +1,71 @@
+[package]
+name = "veritasm-fuzz"
+version = "0.0.0"
+publish = false
+edition = "2021"
+license = "MIT"
+
+[package.metadata]
+cargo-fuzz = true
+
+[dependencies]
+flate2 = { version = "1.1", default-features = false, features = ["rust_backend"] }
+libfuzzer-sys = "0.4"
+sha2 = "0.11"
+tempfile = "3.23"
+veritasm = { path = "..", version = "=0.4.0-dev.1" }
+
+[lints.rust]
+unsafe_code = "forbid"
+
+[[bin]]
+name = "fastx"
+path = "fuzz_targets/fastx.rs"
+test = false
+doc = false
+bench = false
+
+[[bin]]
+name = "gzip"
+path = "fuzz_targets/gzip.rs"
+test = false
+doc = false
+bench = false
+
+[[bin]]
+name = "paired"
+path = "fuzz_targets/paired.rs"
+test = false
+doc = false
+bench = false
+
+[[bin]]
+name = "spool"
+path = "fuzz_targets/spool.rs"
+test = false
+doc = false
+bench = false
+
+[[bin]]
+name = "count_run"
+path = "fuzz_targets/count_run.rs"
+test = false
+doc = false
+bench = false
+
+[[bin]]
+name = "bundle_manifest"
+path = "fuzz_targets/bundle_manifest.rs"
+test = false
+doc = false
+bench = false
+
+[[bin]]
+name = "bundle"
+path = "fuzz_targets/bundle.rs"
+test = false
+doc = false
+bench = false
+
+# Keep the fuzz harness isolated from the package at the repository root.
+[workspace]

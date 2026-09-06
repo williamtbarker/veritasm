@@ -1,0 +1,34 @@
+{
+  "descriptor_schema_version": "1.0",
+  "artifact": "junctions.tsv",
+  "artifact_schema_version": "2.0",
+  "format": "tsv",
+  "encoding": "UTF-8",
+  "line_ending": "LF",
+  "final_newline": true,
+  "delimiter": "TAB",
+  "header": true,
+  "empty_data_rows_allowed": true,
+  "missing_value": "NA",
+  "columns": [
+    "schema_version",
+    "contig_id",
+    "boundary_zero_based",
+    "classification",
+    "compatible_placement_count",
+    "left_flank_placement_count",
+    "right_flank_placement_count",
+    "primary_minor_chimera",
+    "compatible_unique_placement",
+    "left_flank_unique_placement",
+    "right_flank_unique_placement"
+  ],
+  "classifications": [
+    "correct_truth_adjacency",
+    "false_junction",
+    "indeterminate_ambiguous_flank",
+    "indeterminate_unmapped_flank"
+  ],
+  "algorithm": "exact_packed_window_occurrence_index_v2",
+  "evidence_semantics": "Exact occurrence counts are complete. A placement is materialized only when its count is one. Row selection is recorded in result.json."
+}

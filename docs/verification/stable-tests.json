@@ -1,0 +1,15 @@
+{
+  "name": "stable-tests",
+  "command": [
+    "cargo",
+    "test",
+    "--locked",
+    "--all-targets",
+    "--all-features",
+    "--no-fail-fast"
+  ],
+  "cwd": "/workspace/scratch/9b3fa4aeffd8/work/veritasm-github",
+  "utc": "2026-09-06T03:55:09.682603+00:00",
+  "exit_code": 101,
+  "seconds": 20.49
+}

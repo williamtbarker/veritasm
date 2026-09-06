@@ -1,0 +1,10 @@
+   Compiling veritasm v0.4.0-dev.1 (/workspace/scratch/9b3fa4aeffd8/work/veritasm-github)
+    Finished `test` profile [unoptimized + debuginfo] target(s) in 1.61s
+     Running tests/validation_schema.rs (/workspace/scratch/9b3fa4aeffd8/build-msrv/debug/deps/validation_schema-a22a50006ee018a0)
+
+running 2 tests
+test portable_dataset_path_schema_has_the_frozen_ascii_grammar ... ok
+test emitted_json_and_tsv_artifacts_conform_to_shipped_schemas ... ok
+
+test result: ok. 2 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.06s
+

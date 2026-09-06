@@ -1,0 +1,66 @@
+{
+  "descriptor_schema_version": "1.0",
+  "artifact": "assembly.gfa",
+  "artifact_schema_version": "1.1",
+  "format": "GFA",
+  "gfa_version": "1.0",
+  "encoding": "UTF-8",
+  "line_ending": "LF",
+  "final_newline": true,
+  "record_order": ["H", "S", "L"],
+  "allowed_record_types": ["H", "S", "L"],
+  "forbidden_record_types": ["J"],
+  "header_record": {
+    "cardinality": 1,
+    "fields_in_exact_order": [
+      { "literal": "H" },
+      { "literal": "VN:Z:1.0" },
+      { "literal": "PN:Z:veritasm" },
+      { "grammar": "PV:Z:<package-version>" },
+      { "literal": "SC:Z:1.1" }
+    ]
+  },
+  "segment_record": {
+    "cardinality": "one_per_emitted_unitig",
+    "fields_in_exact_order": [
+      { "literal": "S" },
+      { "name": "segment_id", "pattern": "^utg-[0-9a-f]{64}$" },
+      { "name": "sequence", "pattern": "^[ACGT]+$" },
+      { "name": "topology", "grammar": "TP:Z:<linear|closed_graph_walk>" },
+      { "name": "edge_steps", "pattern": "^ES:i:[1-9][0-9]*$", "maximum": "1000000000" },
+      { "name": "canonical_kmers", "pattern": "^CK:i:[1-9][0-9]*$", "maximum": "500000000" },
+      { "name": "sequence_sha256", "pattern": "^SH:H:[0-9A-F]{64}$" }
+    ],
+    "sort_key": "same total order as unitigs.fasta and unitig_evidence.tsv"
+  },
+  "link_record": {
+    "cardinality": "zero_or_more",
+    "fields_in_exact_order": [
+      { "literal": "L" },
+      { "name": "from_segment", "pattern": "^utg-[0-9a-f]{64}$" },
+      { "name": "from_orientation", "enum": ["+", "-"] },
+      { "name": "to_segment", "pattern": "^utg-[0-9a-f]{64}$" },
+      { "name": "to_orientation", "enum": ["+", "-"] },
+      { "name": "overlap", "grammar": "<decimal-k-minus-one>M" }
+    ],
+    "sort_key": [
+      "from_segment_unsigned_byte_lexicographic_ascending",
+      "from_orientation_enum_plus_before_minus",
+      "to_segment_unsigned_byte_lexicographic_ascending",
+      "to_orientation_enum_plus_before_minus",
+      "overlap_numeric_ascending"
+    ]
+  },
+  "empty_graph": "The file contains the literal H record plus LF and no S or L records.",
+  "constraints": [
+    "All S records precede all L records.",
+    "Each S sequence and metadata agree byte-for-byte with its FASTA and evidence-table record.",
+    "The S sequence length equals edge_steps plus k minus one.",
+    "Every S record has edge_steps equal to canonical_kmers; one segment cannot consume a backing canonical key more than once.",
+    "Each L overlap is exactly k minus one bases.",
+    "Each oriented L suffix and prefix match for exactly the declared overlap.",
+    "A link and its reverse-complement representation are emitted once under the architecture's typed lexical canonicalization; hairpin and self-links remain.",
+    "Pair observations never create GFA links.",
+    "A separate streaming semantic read-back validator compares every ordered H, S, and L field with the typed graph data before commit."
+  ]
+}

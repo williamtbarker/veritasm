@@ -1,0 +1,89 @@
+{
+  "descriptor_schema_version": "1.0",
+  "artifact": "unitig_evidence.tsv",
+  "artifact_schema_version": "1.1",
+  "format": "tsv",
+  "encoding": "UTF-8",
+  "line_ending": "LF",
+  "final_newline": true,
+  "delimiter": "TAB",
+  "header": true,
+  "empty_data_rows_allowed": true,
+  "missing_value": "NA",
+  "columns": [
+    { "name": "schema_version", "type": "literal", "value": "1.1" },
+    { "name": "unitig_id", "type": "stable_content_derived_identifier", "pattern": "^utg-[0-9a-f]{64}$" },
+    { "name": "length_bases", "type": "u64_decimal", "minimum": "3" },
+    { "name": "k", "type": "u8_decimal", "minimum": "3", "maximum": "63" },
+    { "name": "topology", "type": "enum", "values": ["linear", "closed_graph_walk"] },
+    { "name": "edge_steps", "type": "u64_decimal", "minimum": "1" },
+    { "name": "canonical_kmers", "type": "u64_decimal", "minimum": "1" },
+    { "name": "support_unit", "type": "enum", "values": ["supplied_fragment_instance", "accepted_window_occurrence"] },
+    { "name": "retention_min_support", "type": "u64_decimal", "minimum": "1" },
+    { "name": "minimum_represented_key_support", "type": "u64_decimal", "minimum": "1" },
+    { "name": "lower_median_represented_key_support", "type": "u64_decimal", "minimum": "1" },
+    { "name": "maximum_represented_key_support", "type": "u64_decimal", "minimum": "1" },
+    { "name": "enumeration_complete_read_placements", "type": "u64_decimal_or_NA", "minimum": "0" },
+    { "name": "single_group_read_instances", "type": "u64_decimal_or_NA", "minimum": "0" },
+    { "name": "multi_group_read_instances_with_group", "type": "u64_decimal_or_NA", "minimum": "0" },
+    {
+      "name": "placement_enumeration_status",
+      "type": "enum",
+      "values": [
+        "placement_enumeration_complete",
+        "unavailable_closed_walk_audit_unsupported",
+        "unavailable_remap_disabled",
+        "indeterminate_candidate_limit"
+      ]
+    },
+    { "name": "sequence_sha256", "type": "lowercase_sha256", "pattern": "^[0-9a-f]{64}$" }
+  ],
+  "row_constraints": [
+    "length_bases equals edge_steps plus k minus one.",
+    "edge_steps equals canonical_kmers; an emitted representative cannot consume one backing canonical key more than once.",
+    "minimum_represented_key_support is not greater than lower_median_represented_key_support, which is not greater than maximum_represented_key_support.",
+    {
+      "when": { "placement_enumeration_status": "placement_enumeration_complete" },
+      "require_numeric": [
+        "enumeration_complete_read_placements",
+        "single_group_read_instances",
+        "multi_group_read_instances_with_group"
+      ]
+    },
+    {
+      "when": {
+        "placement_enumeration_status": [
+          "unavailable_closed_walk_audit_unsupported",
+          "unavailable_remap_disabled",
+          "indeterminate_candidate_limit"
+        ]
+      },
+      "require_literal": {
+        "enumeration_complete_read_placements": "NA",
+        "single_group_read_instances": "NA",
+        "multi_group_read_instances_with_group": "NA"
+      }
+    },
+    {
+      "when": { "topology": "closed_graph_walk" },
+      "require_literal": { "placement_enumeration_status": "unavailable_closed_walk_audit_unsupported" }
+    }
+  ],
+  "file_constraints": [
+    "The literal header and column order are the columns array order.",
+    "No-unitig output is the header followed by LF and no data rows.",
+    "If any eligible read reaches accepted placement group limit plus one, every linear row is indeterminate_candidate_limit and all three placement quantities are NA.",
+    "Every row uses the run's single k, support_unit, and retention_min_support.",
+    "Every retained canonical key belongs to exactly one emitted unitig orbit and contributes once to canonical_kmers and support summaries."
+  ],
+  "sort_key": [
+    { "field": "length_bases", "comparison": "numeric", "direction": "descending" },
+    {
+      "field": "canonical_sequence_bytes",
+      "source": "unitigs.fasta record joined by unitig_id",
+      "comparison": "unsigned_byte_lexicographic",
+      "direction": "ascending"
+    },
+    { "field": "unitig_id", "comparison": "unsigned_byte_lexicographic", "direction": "ascending" }
+  ]
+}

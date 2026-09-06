@@ -1,0 +1,38 @@
+/target/
+/fuzz/target/
+/results/
+/generated/
+/validation-work/
+/veritasm-*-source.zip
+/veritasm-*-source.zip.sha256
+*.fasta.gz
+*.fastq.gz
+!examples/data/basic_paired/reads_R1.fastq.gz
+!examples/data/basic_paired/reads_R2.fastq.gz
+*.fa.gz
+*.fq.gz
+*.assembly.json
+.DS_Store
+
+# Local build evidence and development backups.
+/fuzz/artifacts/
+/fuzz/evidence/
+/fuzz/coverage/
+*.crate
+/veritasm-checkpoint-*.zip
+/veritasm*-recovery-*.zip
+/veritasm_dev_1.zip
+/veritasm-prod.zip
+
+# Temporary source-packager state, including interrupted invocations.
+/.veritasm-package.*/
+/.veritasm-source-package.lock/
+
+# Local configuration and review exports.
+.env
+.env.*
+!.env.example
+/veritasm-github-checkpoint.zip
+/veritasm-github-cleanup.zip
+/veritasm-github-cleanup/
+/veritasm-before-public-cleanup-*.zip

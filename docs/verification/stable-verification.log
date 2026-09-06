@@ -1,0 +1,820 @@
+rustc 1.98.1 (48a229cea 2026-09-01)
+cargo 1.98.1 (797e8a9bc 2026-08-05)
+    Blocking waiting for file lock on package cache
+    Blocking waiting for file lock on package cache
+    Checking clap_builder v4.6.6
+    Checking clap v4.6.6
+    Checking veritasm v0.4.0-dev.1 (/workspace/scratch/9b3fa4aeffd8/work/veritasm-github)
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 31.22s
+   Compiling veritasm v0.4.0-dev.1 (/workspace/scratch/9b3fa4aeffd8/work/veritasm-github)
+    Finished `test` profile [unoptimized + debuginfo] target(s) in 57.99s
+     Running unittests src/lib.rs (/workspace/scratch/9b3fa4aeffd8/build-target/debug/deps/veritasm-69c173ed08a9bed1)
+
+running 545 tests
+test audit::tests::disabled_audit_builds_no_index_and_reports_that_fact ... ok
+test audit::tests::empty_linear_target_universe_is_complete_and_eligible_reads_are_unmapped ... ok
+test audit::tests::derived_read_workspace_is_checked_before_normalization ... ok
+test audit::tests::aggregates_count_groups_single_reads_and_deduplicated_multi_memberships ... ok
+test audit::tests::limit_plus_one_discards_candidate_prefix_and_marks_every_linear_row ... ok
+test audit::tests::candidate_limit_on_r1_does_not_short_circuit_r2 ... ok
+test audit::tests::palindromic_read_has_two_strand_groups_at_each_start ... ok
+test audit::tests::placement_memory_limit_fails_before_retaining_the_first_group ... ok
+test audit::tests::quality_and_ambiguity_are_ineligible_and_later_mate_equivalent_is_still_audited ... ok
+test audit::tests::junction_spanning_reads_are_not_claimed_as_segment_placements ... ok
+test audit::tests::sorted_target_blocks_are_deduplicated_without_a_membership_index ... ok
+test audit::tests::shorter_than_k_placement_is_not_mislabeled_as_kmer_support ... ok
+test audit::tests::stable_audit_uses_q15_index_and_carries_instance_provenance ... ok
+test audit::tests::target_start_and_strand_order_is_frozen ... ok
+test bloom::tests::dimensions_and_active_bits_are_enforced ... ok
+test bloom::tests::default_constructor_rejects_an_oversized_filter_before_allocation ... ok
+test bloom::tests::domain_admission_is_checked_before_prototype_owned_copying ... ok
+test audit::tests::indexed_target_storage_shares_the_audit_persistent_admission ... ok
+test bloom::tests::fragment_and_candidate_copies_fail_with_typed_memory_errors ... ok
+test bloom::tests::explicit_filter_budget_covers_owned_state_and_probe_reservation ... ok
+test bloom::tests::fragment_local_duplicates_do_not_create_a_second_hit ... ok
+test bloom::tests::ineligible_support_semantics_cannot_construct_a_two_hit_sieve ... ok
+test bloom::tests::sha256_probe_contract_has_a_cross_platform_golden_vector ... ok
+test bloom::tests::ordinals_and_complete_sealing_are_enforced ... ok
+test bloom::tests::two_filter_admission_uses_one_combined_budget ... ok
+test bloom::tests::minimum_filter_with_64_probes_visits_every_bit_once ... ok
+test bloom::tests::structure_domains_change_probe_vectors ... ok
+test bundle::tests::complete_audit_rejects_unreconciled_placement_and_membership_totals ... ok
+test bundle::tests::complete_unitig_audit_reconciles_placements_and_memberships_per_unitig ... ok
+test bundle::tests::bundle_rejects_a_manually_invalid_scientific_config_before_output ... ok
+test bundle::tests::bundle_memory_admission_counts_live_owned_capacities_before_output ... ok
+test bundle::tests::convenience_writer_acquires_lease_before_bundle_validation ... ok
+test bundle::tests::dangling_destination_symlink_is_treated_as_an_existing_result ... ok
+test bundle::tests::every_injected_lock_initialization_failure_cleans_the_owned_lock ... ok
+test bundle::tests::every_unitig_support_statistic_must_exist_in_the_retained_histogram ... ok
+test bundle::tests::existing_destination_is_never_modified ... ok
+test bundle::tests::existing_lock_is_preserved_and_requires_manual_review ... ok
+test audit::tests::target_and_finish_indexes_are_admitted_before_tree_construction ... ok
+test bundle::tests::invalid_public_manifest_limits_fail_before_filesystem_access ... ok
+test bundle::tests::historical_spool_bytes_are_not_charged_after_phase_drop ... ok
+test bundle::tests::limited_file_digest_detects_limit_plus_one_without_hashing_unbounded_input ... ok
+test bundle::tests::lock_cleanup_preserves_a_pre_drop_replacement_file ... ok
+test bundle::tests::manifest_verifier_rejects_a_static_fifo_without_blocking ... ok
+test bundle::tests::manifest_verifier_rejects_concurrent_fifo_substitution_without_blocking ... ok
+test bundle::tests::manifest_verifier_rejects_concurrent_symlink_substitution_at_open ... ok
+test bundle::tests::mapper_descriptor_must_reconcile_to_the_indexed_target_instance ... ok
+test bundle::tests::no_op_retention_cannot_change_the_state_digest ... ok
+test bundle::tests::cooperative_concurrent_writers_commit_once ... ok
+test bundle::tests::pair_endpoint_distance_must_be_inside_its_linear_segment ... ok
+test bundle::tests::pair_lane_summary_requires_every_zero_state_in_exact_order ... ok
+test bundle::tests::pair_link_identity_excludes_support_from_uniqueness_key ... ok
+test bundle::tests::pair_links_are_validated_and_reconciled_per_catalogued_lane ... ok
+test bundle::tests::public_manifest_default_rejects_an_oversized_manifest_before_parsing ... ok
+test bundle::tests::noncooperating_destination_creation_wins_without_replacement ... ok
+test bundle::tests::complete_bundle_bytes_are_deterministic ... ok
+test bundle::tests::leased_writer_consumes_the_exact_early_lease_without_relocking ... ok
+test bundle::tests::empty_and_closed_only_bundles_follow_contract ... ok
+test bundle::tests::raised_manifest_limits_do_not_request_limit_sized_allocations ... ok
+test bundle::tests::retained_support_mass_must_fit_conservative_unitig_bounds ... ok
+test bundle::tests::spool_byte_telemetry_obeys_both_limits_inclusively ... ok
+test bundle::tests::public_manifest_limits_are_inclusive_at_every_boundary ... ok
+test bundle::tests::stage_enforces_output_and_aggregate_temporary_byte_limits ... ok
+test bundle::tests::transport_telemetry_obeys_effective_limits_inclusively ... ok
+test bundle::tests::streaming_gfa_validator_compares_every_ordered_record_byte ... ok
+test bundle::tests::unitig_backing_keys_must_equal_edge_steps ... ok
+test bundle::tests::unitig_support_mass_arithmetic_is_checked ... ok
+test bundle::tests::unitig_support_mass_bounds_are_inclusive ... ok
+test compact::tests::booth_rotation_handles_repeated_values ... ok
+test compact::tests::branch_walks_conserve_views_and_keys_and_emit_all_transitions ... ok
+test compact::tests::compaction_rejects_a_budget_without_room_beyond_the_resident_graph ... ok
+test compact::tests::emits_one_reverse_complement_orbit_for_a_linear_path ... ok
+test compact::tests::empty_graph_has_no_walks_unitigs_or_links ... ok
+test bundle::tests::typed_streaming_validators_reject_mutated_tsv_json_and_html ... ok
+test compact::tests::palindromic_boundaries_retain_a_hairpin_link ... ok
+test compact::tests::residual_cycle_has_repeated_context_and_canonical_self_link ... ok
+test compact::tests::reverse_complement_input_spelling_has_identical_output ... ok
+test compact::tests::self_rc_edge_is_a_conservative_compaction_barrier ... ok
+test bundle::tests::public_manifest_file_limit_bounds_a_large_flat_inventory ... ok
+test config::tests::assemble_config_rejects_a_manually_invalid_scientific_config_first ... ok
+test compact::tests::unitig_identity_uses_the_frozen_complete_preimage ... ok
+test config::tests::manually_constructed_scientific_configs_are_validated ... ok
+test config::tests::profiles_expand_without_hidden_overrides ... ok
+test config::tests::transport_limits_have_explicit_valid_domains ... ok
+test config::tests::worker_stacks_have_a_dedicated_budget_share ... ok
+test count::tests::authenticated_reader_binds_the_registered_whole_file_digest ... ok
+test count::tests::corrupted_completed_run_fails_before_summary ... ok
+test count::tests::count_manifest_mutation_is_not_adopted_as_new_provenance ... ok
+test count::tests::combined_digest_pass_matches_independent_framing ... ok
+test count::tests::descriptor_exhaustion_is_a_resource_error ... ok
+test count::tests::empty_event_stream_has_framed_digests ... ok
+test bundle::tests::public_manifest_depth_limit_bounds_listed_paths_and_iterative_traversal ... ok
+test count::tests::count_temporary_accounting_obeys_limit_minus_one_limit_and_plus_one ... ok
+test count::tests::exact_counts_and_retention_match_oracle ... ok
+test count::tests::invalid_observation_poisons_the_public_counter_state ... ok
+test count::tests::failed_merge_authentication_preserves_all_predecessors ... ok
+test count::tests::lazy_final_iterator_advances_at_eof_and_is_terminal_after_error ... ok
+test count::tests::observation_buffer_and_run_inventory_stay_inside_the_concurrent_half_budget ... ok
+test count::tests::ordinal_gap_fails_closed ... ok
+test count::tests::public_options_are_fully_revalidated_at_construction ... ok
+test count::tests::reauthenticated_count_runs_still_enforce_record_semantics ... ok
+test count::tests::retained_capacity_and_lazy_reader_overlap_have_a_hard_budget_boundary ... ok
+test count::tests::retained_key_and_run_caps_fail_closed ... ok
+test count::tests::run_records_must_match_their_declared_numeric_partition ... ok
+test compact::tests::exhaustive_k3_single_and_pair_sets_compact_without_loss ... ok
+test count::tests::every_single_byte_count_run_corruption_is_rejected ... ok
+test dna::tests::every_declared_iupac_ambiguity_is_a_window_break ... ok
+test dna::tests::exact_round_trip_at_both_length_limits ... ok
+test dna::tests::fragment_support_deduplicates_within_and_across_mates ... ok
+test dna::tests::invalid_input_uses_stable_typed_errors ... ok
+test count::tests::skewed_partition_forces_fan_in_sixteen_multi_pass_merge ... ok
+test dna::tests::maximum_length_key_leaves_two_high_bits_zero ... ok
+test dna::tests::iupac_reverse_complement_is_an_involution_after_normalization ... ok
+test dna::tests::quality_domain_boundaries_are_q0_through_q93 ... ok
+test bundle::tests::public_manifest_verifier_rejects_inventory_and_manifest_mutations ... ok
+test dna::tests::scanner_partitions_ambiguity_and_quality_exclusively ... ok
+test error::tests::context_is_always_safe_for_one_line_diagnostics ... ok
+test error::tests::ordinary_context_is_preserved_exactly ... ok
+test error::tests::transport_envelope_failures_have_distinct_stable_codes ... ok
+test experimental::authenticated_pair_graph::tests::adapter_and_mapping_roots_are_deterministic_across_workers ... ok
+test dna::tests::packed_reverse_complement_and_canonical_properties ... ok
+test dna::tests::rolling_scan_matches_a_window_oracle ... ok
+test experimental::authenticated_pair_graph::tests::adapter_cardinality_and_memory_limits_fail_before_publication ... ok
+test experimental::authenticated_pair_graph::tests::paired_source_maps_only_through_the_authenticated_adapter ... ok
+test bloom::tests::exhaustive_collision_heavy_retained_stream_matches_exact_oracle ... ok
+test experimental::authenticated_pair_graph::tests::cross_source_capabilities_and_spools_are_rejected ... ok
+test experimental::authenticated_pair_graph::tests::root_target_and_configuration_tampering_fail_closed ... ok
+test experimental::authenticated_pair_graph::tests::single_end_source_can_be_reconstructed_but_not_pair_mapped ... ok
+test experimental::compacted_dbg::tests::cycle_fixture_emits_closed_walk_and_exact_self_link ... ok
+test experimental::compacted_dbg::tests::branch_fixture_preserves_all_literal_transitions_as_links ... ok
+test experimental::compacted_dbg::tests::every_explicit_graph_cardinality_and_output_limit_fails_closed ... ok
+test experimental::compacted_dbg::tests::authenticated_graph_rejects_omitted_topology_and_seal_mutations ... ok
+test experimental::compacted_dbg::tests::fragment_instance_support_unit_is_preserved_without_reinterpretation ... ok
+test bundle::tests::every_injected_precommit_failure_leaves_no_result ... ok
+test count::tests::occurrence_counts_and_digests_ignore_partition_and_flush_layout ... ok
+test experimental::compacted_dbg::tests::linear_path_preserves_exact_keys_support_and_provenance ... ok
+test experimental::compacted_dbg::tests::large_cycle_rotation_and_matching_have_linear_comparison_bounds ... ok
+test experimental::compacted_dbg::tests::linear_time_rotation_selector_matches_naive_exhaustive_oracle ... ok
+test experimental::compacted_dbg::tests::operational_limits_do_not_change_authenticated_scientific_identity ... ok
+test experimental::compacted_dbg::tests::packed_word_boundaries_through_k127_match_literal_oracle ... ok
+test experimental::compacted_dbg::tests::rejects_duplicate_unsorted_and_nonconserved_support_rows ... ok
+test experimental::compacted_dbg::tests::rejects_mutated_routing_and_preallocates_under_resource_limits ... ok
+test experimental::compacted_dbg::tests::repeat_fixture_stops_at_ambiguous_topology_without_choosing_a_path ... ok
+test experimental::compacted_dbg::tests::reverse_complement_fixed_edge_is_a_one_step_boundary_unitig ... ok
+test experimental::compacted_dbg::tests::scalar_configuration_errors_precede_memory_admission ... ok
+test experimental::compacted_dbg::tests::self_reverse_complement_node_stops_an_otherwise_linear_walk ... ok
+test experimental::compacted_dbg::tests::many_closed_orbits_emit_one_self_link_without_cross_orbit_rescans ... ok
+test experimental::compacted_dbg::tests::serial_compaction_ignores_source_observation_and_ambient_pool_order ... ok
+test experimental::compacted_dbg::tests::support_unit_changes_provenance_but_not_content_identity ... ok
+test experimental::compacted_dbg::tests::wide_k_127_path_retains_full_identity ... ok
+test experimental::compacted_dbg::tests::shared_k_domain_matches_the_independent_stable_graph_compactor ... ok
+test experimental::evidence_reconstruction::tests::closed_walk_survives_only_with_interior_and_closure_witnesses ... ok
+test experimental::evidence_reconstruction::tests::authenticated_spool_child_happy_path_and_tampering_fail_closed ... ok
+test experimental::evidence_reconstruction::tests::endpoint_exclusion_and_iupac_boundary_are_explicit ... ok
+test experimental::compacted_dbg::tests::arbitrary_small_exact_edge_sets_match_literal_oracle ... ok
+test experimental::evidence_reconstruction::tests::missing_boundary_cross_product_is_visible_and_not_emitted ... ok
+test experimental::evidence_reconstruction::tests::missing_internal_transition_splits_without_dropping_edges ... ok
+test experimental::evidence_reconstruction::tests::randomized_single_bit_mutations_of_reported_digests_are_rejected ... ok
+test experimental::evidence_reconstruction::tests::resource_limits_have_minus_exact_and_plus_one_boundaries ... ok
+test experimental::evidence_reconstruction::tests::scheduling_and_repeat_execution_are_byte_structurally_deterministic ... ok
+test experimental::evidence_reconstruction::tests::unverified_state_is_visible_and_root_bound ... ok
+test experimental::evidence_reconstruction::tests::validator_refuses_every_non_read_evidence_kind_and_tampering ... ok
+test count::tests::summary_budget_is_checked_before_a_new_histogram_bin_allocates ... ok
+test experimental::external_cdbg::tests::capped_materialization_and_node_limit_are_enforced ... ok
+test experimental::external_cdbg::tests::cleanup_refuses_a_replaced_directory_path ... ok
+test experimental::external_cdbg::tests::cleanup_rejects_changed_directory_mode_and_entry_count_overflow ... ok
+test experimental::external_cdbg::tests::cleanup_rejects_permissions_and_symlinks_without_following_them ... ok
+test experimental::external_cdbg::tests::cleanup_validates_every_entry_before_deleting_any_file ... ok
+test experimental::external_cdbg::tests::codec_rejects_header_payload_chain_trailer_eof_and_inode_mutations ... ok
+test experimental::external_cdbg::tests::duplicate_terminal_sides_and_support_overflow_are_typed_failures ... ok
+test experimental::external_cdbg::tests::empty_stream_uses_the_unique_zero_block_sentinel ... ok
+test experimental::compacted_dbg::tests::generated_sources_match_literal_oracle_and_reverse_complement ... ok
+test experimental::external_cdbg::tests::exact_fixed_edge_caps_admit_the_actual_one_handle_and_two_incidences ... ok
+test experimental::external_cdbg::tests::every_single_byte_mutation_truncation_and_append_of_a_run_is_rejected ... ok
+test experimental::external_cdbg::tests::final_node_audit_rejects_valid_but_reverse_complement_asymmetric_masks ... ok
+test experimental::external_cdbg::tests::fixed_byte_layout_round_trips_without_native_struct_serialization ... ok
+test experimental::external_cdbg::tests::fixed_edges_and_reverse_fixed_nodes_are_hard_boundaries ... ok
+test experimental::external_cdbg::tests::input_permutation_changes_neither_exact_tables_nor_scientific_roots ... ok
+test experimental::external_cdbg::tests::limits_faults_and_existing_directories_fail_without_residue_or_clobbering ... ok
+test experimental::external_cdbg::tests::literal_oracle_and_all_conservation_totals_match ... ok
+test experimental::external_cdbg::tests::packed_width_boundaries_are_exact_through_k127 ... ok
+test experimental::external_cdbg::tests::private_paths_have_restrictive_permissions_and_unique_ownership ... ok
+test experimental::external_cdbg::tests::provisional_crash_residue_is_unpublishable_and_does_not_block_a_new_build ... ok
+test experimental::evidence_reconstruction::tests::complete_k5_branch_graph_accounts_for_every_raw_link_candidate ... ok
+test experimental::external_reduce::tests::changed_directory_permissions_are_reported_without_cleanup ... ok
+test experimental::external_reduce::tests::empty_source_succeeds_with_zero_scientific_limits_and_no_run ... ok
+test experimental::external_reduce::tests::exchanged_valid_run_contents_fail_closed_before_publish_or_reclamation ... ok
+test experimental::external_reduce::tests::forced_multi_pass_external_reduction_matches_independent_oracle ... ok
+test experimental::external_cdbg::tests::skew_and_spill_plan_do_not_change_scientific_outputs ... ok
+test experimental::external_reduce::tests::open_file_and_memory_envelopes_are_validated_before_work ... ok
+test experimental::external_reduce::tests::owned_memory_admission_has_exact_boundaries_and_charges_long_paths ... ok
+test experimental::external_reduce::tests::input_order_and_routing_collisions_do_not_change_full_key_counts ... ok
+test experimental::external_reduce::tests::renamed_directory_substitution_is_reported_without_deleting_replacement ... ok
+test experimental::external_reduce::tests::source_mismatch_and_resource_limits_fail_without_persisting_runs ... ok
+test experimental::external_reduce::tests::stale_legacy_run_directory_is_never_reused_or_clobbered ... ok
+test experimental::external_reduce::tests::unexpected_cleanup_entry_is_reported_and_preserved ... ok
+test experimental::external_reduce::tests::unique_run_directories_are_private_and_do_not_collide ... ok
+test experimental::compacted_dbg::tests::exhaustive_k3_short_sources_match_independent_literal_oracle ... ok
+test experimental::external_run::tests::corruption_truncation_schema_endian_and_trailing_bytes_are_rejected ... ok
+test experimental::external_run::tests::create_new_collision_preserves_existing_file ... ok
+test experimental::external_run::tests::fallible_fixed_buffers_round_trip_without_capacity_growth ... ok
+test experimental::external_run::tests::fixed_width_run_round_trips_and_binds_source ... ok
+test experimental::external_run::tests::header_and_record_numeric_fields_use_declared_endianness ... ok
+test experimental::external_run::tests::impossible_buffer_admission_is_typed_and_precedes_file_creation ... ok
+test experimental::external_run::tests::nofollow_reader_rejects_symbolic_link ... ok
+test experimental::external_run::tests::noncanonical_and_wrong_owner_records_are_rejected_before_sealing ... ok
+test experimental::external_run::tests::reduced_writer_rejects_duplicate_full_keys_even_if_counts_differ ... ok
+test experimental::external_run::tests::registered_reader_and_cleanup_reject_inode_substitution ... ok
+test experimental::external_run::tests::routing_reference_is_complete_key_not_bucket_identity ... ok
+test experimental::multik::tests::builds_all_typed_rows_without_projecting_sequence ... ok
+test experimental::external_reduce::tests::wide_k_127_spills_exact_complete_keys ... ok
+test experimental::multik::tests::configuration_and_resource_limits_fail_closed ... ok
+test experimental::multik::tests::parent_and_oracle_front_matter_is_admitted_before_child_construction ... ok
+test experimental::multik::tests::child_and_relation_order_ignore_input_order_and_rayon_pool_size ... ok
+test experimental::multik::tests::self_reverse_complement_edge_has_one_fixed_side_with_two_terminal_events ... ok
+test experimental::multik::tests::source_oracle_rejects_changed_bases_and_child_counts ... ok
+test experimental::multik::tests::support_oracle_rejects_an_adjacency_not_replayed_by_higher_edge ... ok
+test experimental::external_reduce::tests::randomized_spill_layouts_match_the_source_window_oracle ... ok
+test experimental::multik::tests::validates_wide_exact_children_across_u128_boundary ... ok
+test experimental::multik_bundle::tests::child_validation_scratch_has_exact_boundaries ... ok
+test experimental::multik_bundle::tests::exact_agreement_profile_excludes_singletons_and_all_unique_groups ... ok
+test experimental::multik_bundle::tests::exact_agreement_requires_two_distinct_k_children ... ok
+test experimental::multik_bundle::tests::malformed_snapshot_json_never_panics ... ok
+test experimental::multik_bundle::tests::noncooperating_destination_is_preserved ... ok
+test experimental::multik_bundle::tests::pair_resource_unavailability_requires_an_exact_exceeded_limit ... ok
+test experimental::multik_bundle::tests::snapshot_descriptor_rejects_in_place_and_path_substitution ... ok
+test experimental::multik_bundle::tests::snapshot_descriptor_rejects_symlink_and_platform_fifo_without_opening_them ... ok
+test experimental::evidence_reconstruction::tests::wide_k126_and_large_linear_child_avoid_quadratic_link_lookup ... ok
+test experimental::multik_bundle::tests::stage_enforces_minus_exact_and_plus_byte_boundaries ... ok
+test experimental::multik_bundle::tests::snapshot_round_trip_and_sequence_tamper_rejection ... ok
+test experimental::multik_bundle::tests::successful_bundle_is_deterministic_and_manifest_verifies ... ok
+test experimental::multik_bundle::tests::unsupported_internal_adjacency_is_rejected_even_with_copied_evidence ... ok
+test experimental::multik_pipeline::tests::aggregate_memory_projection_has_exact_boundaries ... ok
+test experimental::multik_pipeline::tests::aggregate_temp_check_has_exact_boundaries ... ok
+test experimental::multik_pipeline::tests::destination_lease_precedes_missing_input_and_preserves_existing_data ... ok
+test experimental::multik_pipeline::tests::input_failure_does_not_publish_output ... ok
+test experimental::multik_pipeline::tests::malformed_config_is_rejected_before_input_io ... ok
+test experimental::multik_pipeline::tests::pair_resource_availability_is_explicit_at_8192_8193_boundary ... ok
+test experimental::multik_pipeline::tests::paired_preflight_has_exact_mapper_and_aggregate_boundaries_before_input_io ... ok
+test experimental::multik_bundle::tests::transactional_failures_never_publish_partial_destination ... ok
+test experimental::pair_mapper::tests::closed_graph_walks_are_outside_the_exact_mapper_domain ... ok
+test experimental::pair_mapper::tests::eligibility_matches_ambiguity_and_phred_boundaries ... ok
+test experimental::pair_mapper::tests::exact_groups_equal_an_independent_literal_full_read_oracle ... ok
+test experimental::pair_mapper::tests::lane_fragment_mate_identities_and_split_are_exactly_conserved ... ok
+test experimental::pair_mapper::tests::preallocation_caps_accept_exact_boundary_and_reject_one_byte_less ... ok
+test bloom::tests::every_exact_two_hit_key_is_a_candidate ... ok
+test experimental::pair_mapper::tests::representative_graph_decode_work_and_result_caps_fail_closed ... ok
+test experimental::pair_mapper::tests::roots_reject_graph_source_and_authenticated_spool_mutation ... ok
+test experimental::pair_mapper::tests::typed_unavailable_reasons_do_not_publish_partial_or_invented_groups ... ok
+test experimental::pair_mapper::tests::upstream_pair_identifier_mismatch_is_rejected_before_a_spool_exists ... ok
+test experimental::pair_path::tests::a_reachable_path_beyond_the_depth_cap_is_indeterminate ... ok
+test experimental::pair_path::tests::analysis_budget_readmits_the_retained_graph ... ok
+test experimental::pair_mapper::tests::worker_batch_and_unitig_order_do_not_change_scientific_outputs ... ok
+test experimental::pair_path::tests::any_cross_component_or_geometry_alternative_forces_abstention ... ok
+test experimental::pair_path::tests::calibration_and_replay_are_separate_and_reuse_is_reported ... ok
+test experimental::pair_path::tests::canonical_link_identity_is_independent_of_order_and_reciprocal_duplication ... ok
+test experimental::pair_path::tests::certificate_tampering_and_incomplete_enumeration_fail_closed ... ok
+test experimental::pair_path::tests::central_quantiles_retain_but_do_not_fit_one_tail_outlier ... ok
+test experimental::pair_path::tests::complete_result_root_is_deterministic_and_rejects_tampering ... ok
+test experimental::pair_path::tests::corrupt_or_over_limit_evidence_fails_closed ... ok
+test experimental::pair_path::tests::cross_library_and_cross_mapper_model_transfer_fail_closed ... ok
+test experimental::pair_path::tests::component_indexing_handles_a_long_chain_without_quadratic_union_find ... ok
+test experimental::pair_path::tests::equal_length_branch_paths_remain_an_explicit_conflict ... ok
+test experimental::pair_path::tests::exact_k_minus_one_distance_supports_one_existing_path ... ok
+test experimental::pair_path::tests::every_orientation_is_inferred_in_coordinate_order ... ok
+test experimental::pair_path::tests::explicit_arc_and_path_reconstruction_work_caps_fail_indeterminate ... ok
+test experimental::pair_path::tests::geometry_pruning_finishes_a_cycle_without_false_depth_indeterminacy ... ok
+test experimental::pair_path::tests::graph_and_placement_provenance_are_content_bound_and_order_invariant ... ok
+test experimental::pair_path::tests::graph_sequence_hash_work_has_an_exact_boundary ... ok
+test experimental::multik::tests::support_validation_builds_each_child_index_once_per_layer_pair ... ok
+test experimental::pair_path::tests::individual_support_never_authorizes_and_aggregate_requires_two_fragments ... ok
+test experimental::pair_path::tests::k_domain_matches_exact_graph_substrate ... ok
+test experimental::multik_pipeline::tests::real_portfolio_is_byte_deterministic_and_explicitly_serial ... ok
+test experimental::pair_path::tests::linear_unitig_placement_domain_quantifies_junction_unavailability ... ok
+test experimental::pair_path::tests::multimapping_can_support_only_when_all_compatible_observations_share_one_path ... ok
+test experimental::pair_path::tests::lanes_never_pool_and_input_order_and_thread_count_do_not_change_results ... ok
+test experimental::pair_path::tests::non_linear_endpoints_and_traversals_never_support_replay ... ok
+test experimental::pair_path::tests::placement_root_api_rejects_invalid_certificate_and_read_spans ... ok
+test experimental::pair_path::tests::opaque_mapper_capability_binds_disjoint_inputs_and_authenticated_result ... ok
+test experimental::pair_path::tests::pure_same_endpoint_contradiction_blocks_aggregate_availability ... ok
+test experimental::pair_path::tests::exhaustive_small_dag_oracle_matches_every_compatible_path ... ok
+test experimental::pair_path::tests::same_component_geometry_pruning_is_an_adverse_alternative ... ok
+test experimental::partitioned_dbg::tests::bucket_collisions_do_not_merge_exact_minimizers_or_edges ... ok
+test experimental::pair_path::tests::unattributable_placement_cap_makes_every_candidate_indeterminate ... ok
+test experimental::pair_path::tests::target_path_count_exhaustion_is_indeterminate_not_unique ... ok
+test experimental::partitioned_dbg::tests::coordinated_proof_mutation_is_rejected_by_byte_slice_oracle ... ok
+test experimental::partitioned_dbg::tests::invariant_validation_rejects_noncanonical_complete_keys ... ok
+test experimental::partitioned_dbg::tests::minimizer_owner_is_strand_invariant_and_ties_go_left ... ok
+test experimental::partitioned_dbg::tests::input_order_and_rayon_pool_size_do_not_change_output ... ok
+test experimental::partitioned_dbg::tests::minimizer_rolling_state_matches_slice_oracle_across_word_boundaries ... ok
+test experimental::partitioned_dbg::tests::rejects_unsplit_ambiguity_and_duplicate_coordinates ... ok
+test experimental::partitioned_dbg::tests::resource_limits_fail_before_unbounded_growth ... ok
+test experimental::partitioned_dbg::tests::proof_to_span_validation_advances_monotonically_with_many_owner_changes ... ok
+test experimental::partitioned_dbg::tests::segment_and_super_kmer_ledgers_cover_every_window_once ... ok
+test experimental::partitioned_dbg::tests::span_ownership_is_bound_to_each_source_window_proof ... ok
+test experimental::quality_correction::tests::affected_window_geometry_cannot_break_an_evidence_tie ... ok
+test experimental::quality_correction::tests::ambiguous_mosaic_is_raw_or_quarantined_unless_consensus_is_explicit ... ok
+test experimental::quality_correction::tests::batch_is_order_and_worker_count_deterministic ... ok
+test experimental::quality_correction::tests::batch_projection_is_enforced_before_ordinal_order_allocation ... ok
+test experimental::quality_correction::tests::bounded_summary_heap_matches_full_total_order_for_permutations_and_limits ... ok
+test experimental::quality_correction::tests::candidate_cap_quarantines_before_scoring ... ok
+test experimental::quality_correction::tests::comparison_and_auxiliary_work_caps_are_inclusive_and_journaled ... ok
+test experimental::quality_correction::tests::consensus_journals_supported_subthreshold_ambiguity_alternatives ... ok
+test experimental::quality_correction::tests::conservative_two_pass_projection_can_quarantine_before_a_one_pass_abstention ... ok
+test experimental::quality_correction::tests::correction_modes_make_low_count_loss_explicit ... ok
+test experimental::quality_correction::tests::default_quarantines_reads_shorter_than_every_configured_k ... ok
+test experimental::quality_correction::tests::diversity_abstains_for_every_iupac_resolution_symbol ... ok
+test experimental::quality_correction::tests::diversity_mode_requires_independent_context_for_exact_substitution ... ok
+test experimental::quality_correction::tests::dominance_dimensions_are_consistent_with_candidate_ranking ... ok
+test experimental::quality_correction::tests::equal_exact_evidence_quarantines_instead_of_tie_breaking_sequence ... ok
+test experimental::quality_correction::tests::every_exact_base_has_portable_acgt_order_without_the_original ... ok
+test experimental::quality_correction::tests::every_iupac_symbol_has_the_exact_declared_resolution_set ... ok
+test experimental::quality_correction::tests::every_new_resource_limit_changes_configuration_identity_and_rejects_zero ... ok
+test experimental::quality_correction::tests::exact_spectrum_lookup_matches_linear_oracle_and_checked_bound ... ok
+test experimental::partitioned_dbg::tests::exact_partition_matches_direct_rolling_count_oracle ... ok
+test experimental::quality_correction::tests::explicit_terminal_trim_is_losslessly_replayable ... ok
+test experimental::quality_correction::tests::iupac_resolution_never_leaves_the_encoded_symbol_set ... ok
+test experimental::quality_correction::tests::low_quality_correct_base_remains_when_context_is_trusted ... ok
+test experimental::quality_correction::tests::modeled_per_read_memory_limit_is_inclusive_at_the_boundary ... ok
+test experimental::quality_correction::tests::noncanonical_spectrum_key_is_rejected ... ok
+test experimental::compacted_dbg::tests::exhaustive_single_and_pair_edges_k3_k4_match_independent_oracles ... ok
+test experimental::partitioned_dbg::tests::reverse_complement_preserves_exact_partitioned_edge_multiset ... ok
+test experimental::quality_correction::tests::qualified_alternative_summaries_are_sorted_bounded_and_explicit ... ok
+test experimental::quality_correction::tests::spectrum_entry_admission_is_inclusive_and_authenticated ... ok
+test experimental::quality_correction::tests::spectrum_only_mosaic_is_confined_to_consensus_experiment ... ok
+test experimental::quality_correction::tests::transformation_replay_is_panic_free_and_engine_verification_is_complete ... ok
+test experimental::quality_correction::tests::trusted_baseline_precedes_search_only_caps ... ok
+test experimental::quality_correction::tests::trusted_minority_path_is_not_rewritten_to_major_path ... ok
+test experimental::quality_correction::tests::supported_ambiguity_resolution_is_journaled ... ok
+test experimental::quality_correction::tests::two_correlated_substitutions_require_complete_supported_context ... ok
+test experimental::quality_correction::tests::unbound_source_descriptor_is_rejected ... ok
+test experimental::quality_correction::tests::uniquely_dominating_substitution_is_replayable ... ok
+test experimental::quality_correction::tests::versioned_candidate_digest_has_a_portable_golden_vector ... ok
+test experimental::quality_correction::tests::zero_journal_limit_is_rejected_at_engine_construction ... ok
+test experimental::retention::tests::artifact_detects_rows_totals_source_and_complete_resealed_ledger_tampering ... ok
+test experimental::quality_correction::tests::zero_candidate_summary_limit_is_rejected_at_engine_construction ... ok
+test experimental::retention::tests::authentication_detects_post_seal_row_and_root_mutation ... ok
+test experimental::retention::tests::cardinality_and_memory_limits_have_inclusive_exact_boundaries ... ok
+test experimental::retention::tests::deterministic_rebuild_preserves_all_scientific_and_operational_roots ... ok
+test experimental::retention::tests::empty_and_all_discarded_tables_are_complete_authenticated_results ... ok
+test experimental::retention::tests::empty_root_vectors_are_frozen_and_rule_specific ... ok
+test experimental::quality_correction::tests::production_decision_matches_independent_bruteforce_oracle ... ok
+test experimental::retention::tests::inclusive_threshold_boundaries_and_retain_all_semantics_are_exact ... ok
+test experimental::retention::tests::literal_oracle_retains_only_full_keys_meeting_inclusive_support ... ok
+test experimental::retention::tests::operational_limits_never_change_successful_scientific_roots ... ok
+test experimental::retention::tests::public_artifact_detects_source_equivalence_and_operational_root_tampering ... ok
+test experimental::retention::tests::public_capability_requires_spool_and_replays_before_retention ... ok
+test experimental::retention::tests::raw_table_rejects_permutations_noncanonical_keys_bad_routes_and_totals ... ok
+test experimental::retention::tests::support_overflow_is_checked_before_projection ... ok
+test experimental::retention::tests::support_unit_is_preserved_and_bound_into_every_scientific_identity ... ok
+test experimental::retention::tests::tampered_spool_capability_is_rejected ... ok
+test experimental::retention::tests::exact_predicate_and_conservation_match_independent_support_oracle ... ok
+test experimental::spool_external::tests::corrupt_and_truncated_spools_fail_before_external_work ... ok
+test experimental::spool_external::tests::duplicate_identifiers_are_distinct_fragments_but_mate_and_repeat_keys_are_deduplicated ... ok
+test experimental::spool_external::tests::global_window_limit_is_enforced_during_the_first_replay ... ok
+test experimental::spool_external::tests::fragment_temp_and_run_limits_fail_closed_at_edges ... ok
+test experimental::spool_external::tests::impossible_memory_is_rejected_before_a_corrupt_spool_is_read ... ok
+test experimental::spool_external::tests::narrow_occurrence_and_fragment_modes_match_stable_scan_and_preserve_qc_ledger ... ok
+test experimental::spool_external::tests::validated_view_reports_all_five_physical_read_passes_and_rejects_tampering ... ok
+test experimental::spool_external::tests::spill_batching_and_thread_count_do_not_change_exact_scientific_result ... ok
+test experimental::spool_external::tests::wide_k_matches_literal_source_window_enumeration ... ok
+test experimental::transition_witness::tests::empty_accepted_plane_has_a_deterministic_root_and_no_runs ... ok
+test experimental::transition_witness::tests::endpoint_decode_and_wide_transition_boundary_are_exact ... ok
+test experimental::transition_witness::tests::error_cleanup_accepts_only_bounded_private_numeric_runs ... ok
+test experimental::transition_witness::tests::complete_coordinates_count_occurrences_but_deduplicate_fragments_across_mates ... ok
+test experimental::transition_witness::tests::event_limit_is_inclusive_and_one_below_fails_typed ... ok
+test experimental::transition_witness::tests::deterministic_spill_geometry_and_roots_exclude_work_paths ... ok
+test experimental::transition_witness::tests::exact_temp_limit_is_inclusive_and_lower_boundary_cleans_up ... ok
+test experimental::transition_witness::tests::fixed_run_rejects_payload_corruption_at_terminal_authentication ... ok
+test experimental::transition_witness::tests::every_identity_coordinate_orientation_and_header_field_is_authenticated ... ok
+test experimental::transition_witness::tests::literal_small_q_oracle_exhaustively_matches_key_and_orientation ... ok
+test experimental::transition_witness::tests::registered_spool_mutation_is_rejected_before_replay_can_validate ... ok
+test experimental::transition_witness::tests::read_mate_ambiguity_and_quality_boundaries_are_never_crossed ... ok
+test experimental::transition_witness::tests::source_coordinate_plane_rejects_cross_key_duplicates_across_spills ... ok
+test experimental::transition_witness::tests::source_root_literal_preimage_and_every_descriptor_field_are_bound ... ok
+test experimental::transition_witness::tests::run_row_sort_and_open_file_boundaries_fail_without_partial_results ... ok
+test experimental::transition_witness::tests::unique_run_directory_is_private_and_cleanup_is_identity_checked ... ok
+test experimental::transition_witness::tests::writer_rejects_a_duplicate_complete_source_coordinate ... ok
+test experimental::wide_kmer::tests::active_bits_cross_word_boundaries_exactly ... ok
+test experimental::wide_kmer::tests::all_iupac_ambiguities_break_wide_windows ... ok
+test experimental::wide_kmer::tests::ambiguity_reset_requires_a_complete_new_wide_window ... ok
+test experimental::wide_kmer::tests::big_endian_bytes_round_trip_and_preserve_order ... ok
+test experimental::wide_kmer::tests::boundary_lengths_round_trip_and_preserve_canonical_identity ... ok
+test experimental::transition_witness::tests::replay_rejects_mutated_row_support_digest_and_source_fields ... ok
+test experimental::wide_kmer::tests::arbitrary_exact_strings_round_trip_and_canonicalize ... ok
+test experimental::wide_kmer::tests::fused_minimizer_scan_matches_exact_selector_at_ties_resets_and_word_boundaries ... ok
+test experimental::wide_kmer::tests::invalid_input_and_lengths_use_typed_errors ... ok
+test experimental::wide_kmer::tests::narrow_conversion_is_exact_and_checked ... ok
+test experimental::wide_kmer::tests::packed_value_has_the_declared_size_and_alignment ... ok
+test experimental::wide_kmer::tests::every_position_and_base_round_trips_at_boundary_lengths ... ok
+test experimental::wide_kmer::tests::scanner_matches_naive_qc_oracle_at_boundary_lengths ... ok
+test experimental::wide_kmer::tests::rolling_scan_matches_independent_boundary_oracle ... ok
+test experimental::wide_kmer::tests::stable_u128_path_is_identical_through_k63 ... ok
+test experimental::wide_kmer::tests::validation_rejects_first_inactive_bit_at_boundaries ... ok
+test experimental::wide_kmer::tests::wide_identity_does_not_truncate_high_words ... ok
+test fastx::tests::adversarial_physical_line_stops_at_small_content_cap ... ok
+test fastx::tests::crlf_terminator_does_not_consume_content_allowance ... ok
+test fastx::tests::decoded_record_span_accepts_limit_and_rejects_limit_plus_one ... ok
+test experimental::wide_kmer::tests::fused_minimizer_events_match_literal_selector_for_arbitrary_qc_reads ... ok
+test fastx::tests::final_record_is_withheld_after_mutation_before_traversal ... ok
+test fastx::tests::final_record_is_withheld_after_mutation_between_records ... ok
+test fastx::tests::header_payload_limit_accepts_limit_and_rejects_limit_plus_one ... ok
+test fastx::tests::parser_memory_cap_accounts_for_line_and_destination_overlap ... ok
+test fastx::tests::parses_wrapped_fasta_and_arbitrary_header_bytes ... ok
+test fastx::tests::normalized_read_limit_accepts_limit_and_rejects_limit_plus_one ... ok
+test experimental::wide_kmer::tests::stable_scanner_qc_is_identical_through_k63 ... ok
+test fastx::tests::parses_wrapped_fastq_and_checks_plus_role ... ok
+test fastx::tests::record_limit_counts_markers_and_line_endings ... ok
+test fastx::tests::rejects_blank_fastq_sequence_line ... ok
+test fastx::tests::rejects_same_length_decoded_mutation_before_parser_open ... ok
+test graph::tests::creates_one_or_two_views_without_duplicating_support ... ok
+test graph::tests::degree_oracle_counts_distinct_view_identities ... ok
+test fastx::tests::quality_line_is_capped_before_append_and_must_exactly_match ... ok
+test graph::tests::graph_construction_rejects_a_budget_below_its_checked_allocation_plan ... ok
+test graph::tests::palindromic_node_is_boundary_even_with_unit_degree ... ok
+test graph::tests::rejects_noncanonical_unsorted_duplicate_and_zero_support_records ... ok
+test graph::tests::self_reverse_complement_handle_makes_both_endpoints_boundaries ... ok
+test fastx::tests::role_free_headers_count_inference_only_for_paired_streams ... ok
+test graph::tests::ten_million_key_plan_exceeds_the_default_budget_without_allocating ... ok
+test indexed_mapper::tests::actual_allocator_capacities_are_checked_at_each_coexisting_peak ... ok
+test indexed_mapper::tests::admitted_plan_and_constructed_instance_account_for_the_same_index ... ok
+test indexed_mapper::tests::empty_linear_universe_is_a_complete_empty_enumeration ... ok
+test indexed_mapper::tests::exact_limit_is_complete_and_limit_plus_one_discards_prefix ... ok
+test graph::tests::exhaustive_k3_single_and_pair_subsets_satisfy_rc_and_degree_oracles ... ok
+test indexed_mapper::tests::estimated_index_and_materialization_memory_boundaries_are_inclusive ... ok
+test indexed_mapper::tests::identical_sequences_under_distinct_ids_are_distinct_groups ... ok
+test indexed_mapper::tests::invalid_inputs_and_memory_limits_fail_explicitly ... ok
+test indexed_mapper::tests::maximum_seed_width_preserves_full_literal_identity ... ok
+test indexed_mapper::tests::palindromic_groups_and_canonical_order_match_stable_audit ... ok
+test indexed_mapper::tests::generated_cases_match_the_stable_audit_across_limits_and_fallback ... ok
+test indexed_mapper::tests::reordered_targets_closed_walks_and_segment_boundaries_do_not_change_results ... ok
+test indexed_mapper::tests::seed_boundary_lengths_and_both_orientation_modes_match_oracle ... ok
+test indexed_mapper::tests::seed_hits_and_failed_full_verifications_do_not_consume_the_group_limit ... ok
+test indexed_mapper::tests::shared_index_is_deterministic_across_parallel_thread_counts ... ok
+test indexed_mapper::tests::strand_combined_limit_and_short_read_fallback_are_exact ... ok
+test indexed_mapper::tests::unique_seed_fixture_reduces_full_sequence_comparisons ... ok
+test input::tests::accepts_concatenated_gzip_and_rejects_trailing_junk ... ok
+test input::tests::authoritative_counted_reader_is_inclusive_and_probes_only_one_extra_byte ... ok
+test input::tests::detects_and_decodes_gzip_when_transport_arrives_one_byte_at_a_time ... ok
+test input::tests::digest_replay_reads_only_snapshot_length_plus_one_probe ... ok
+test input::tests::gzip_member_limit_is_aggregate_across_sources ... ok
+test input::tests::gzip_member_limit_is_inclusive_and_stops_empty_member_storms ... ok
+test input::tests::raw_transport_limit_is_aggregate_across_sources ... ok
+test input::tests::raw_transport_limits_are_inclusive_for_plain_and_gzip_files ... ok
+test input::tests::rejects_crc_corruption_in_a_later_gzip_member ... ok
+test input::tests::rejects_path_replacement_between_validation_and_open ... ok
+test input::tests::rejects_physical_aliases ... ok
+test input::tests::rejects_same_inode_mutation_during_staging ... ok
+test input::tests::rejects_truncated_and_crc_corrupt_gzip ... ok
+test library_model::tests::arbitrary_input_order_has_identical_output_and_duplicates_fail ... ok
+test library_model::tests::broad_bimodal_span_population_fails_compact_interval_gate ... ok
+test library_model::tests::classifies_all_orientations_in_coordinate_order ... ok
+test library_model::tests::dominance_cross_multiplication_cannot_overflow ... ok
+test library_model::tests::exclusions_follow_one_reconciling_precedence_order ... ok
+test library_model::tests::insufficient_and_mixed_orientation_states_are_explicit ... ok
+test library_model::tests::integer_nearest_rank_quantiles_have_fixed_even_sample_semantics ... ok
+test library_model::tests::invalid_configuration_is_rejected ... ok
+test library_model::tests::invalid_coordinates_strands_and_metadata_are_fatal_without_mutation ... ok
+test library_model::tests::lanes_are_never_pooled ... ok
+test library_model::tests::observation_lane_identifier_and_memory_limits_fail_closed ... ok
+test library_model::tests::outliers_remain_visible_without_moving_central_quantiles ... ok
+test pairs::tests::canonicalization_is_swap_only_and_preserves_roles_and_physical_ends ... ok
+test pairs::tests::conditional_summary_rows_and_reconciliations_are_exact ... ok
+test pairs::tests::endpoint_tie_and_cross_unitig_are_separate ... ok
+test pairs::tests::first_match_precedence_covers_every_paired_state ... ok
+test pairs::tests::identical_endpoint_groups_remain_isolated_by_lane ... ok
+test pairs::tests::pair_link_is_rejected_before_an_unbudgeted_group_is_retained ... ok
+test pairs::tests::pair_target_tree_is_admitted_before_insertion ... ok
+test indexed_mapper::tests::randomized_index_matches_independent_oracle ... ok
+test pairs::tests::streaming_path_matches_slice_oracle_without_retaining_read_rows ... ok
+test report::tests::dynamic_values_cannot_inject_html ... ok
+test report::tests::escapes_every_html_metacharacter ... ok
+test report::tests::presentation_limit_bounds_emitted_unitig_rows ... ok
+test report::tests::renders_scientific_parameters_interpretation_and_linear_target_scope ... ok
+test spool::tests::allocation_aware_iterator_defers_body_until_budget_is_available ... ok
+test spool::tests::authentication_state_distinguishes_early_stop_from_complete_replay ... ok
+test spool::tests::byte_identical_sources_create_byte_identical_spools ... ok
+test spool::tests::completed_pass_counter_matches_one_verifier_and_one_replay_traversal ... ok
+test spool::tests::decode_only_admission_excludes_scan_workspace_and_defers_body ... ok
+test spool::tests::detects_post_completion_corruption ... ok
+test spool::tests::final_fragment_is_withheld_after_mutation_before_first_traversal ... ok
+test spool::tests::final_fragment_is_withheld_after_mutation_between_fragments ... ok
+test spool::tests::nofollow_open_rejects_a_symlink_to_the_registered_spool_inode ... ok
+test spool::tests::one_pass_verifier_rejects_a_bit_flip_at_every_registered_byte_offset ... ok
+test experimental::multik::tests::reverse_complement_preserves_children_and_canonicalized_relations ... ok
+test spool::tests::opened_descriptor_identity_rejects_sequential_aliases ... ok
+test spool::tests::overflowing_trailer_length_is_a_typed_integrity_error ... ok
+test spool::tests::path_replacement_after_iter_open_never_adopts_replacement ... ok
+test spool::tests::reauthenticated_structural_spool_corruption_still_fails_closed ... ok
+test spool::tests::rejects_role_format_and_cardinality_failures ... ok
+test spool::tests::round_trips_single_end_spool ... ok
+test spool::tests::scan_admission_charges_pre_dedup_and_occurrence_vectors_equally ... ok
+test spool::tests::synchronizes_pairs_and_rejects_identity_mismatch ... ok
+test spool::tests::trailer_mutation_withholds_the_only_fragment ... ok
+test transform::tests::emits_exact_two_stages ... ok
+test validation::evaluator::tests::circular_alignment_accepts_rotation_and_seam ... ok
+test validation::evaluator::tests::circularity_is_not_assumed_for_linear_truth ... ok
+test validation::evaluator::tests::duplicate_truth_self_assembly_has_complete_upper_recovery_and_na_duplication ... ok
+test validation::evaluator::tests::empty_denominators_are_explicitly_not_available ... ok
+test validation::evaluator::tests::evidence_identifiers_exclude_delimiter_and_control_ambiguity ... ok
+test validation::evaluator::tests::exact_alignment_plan_preserves_target_ties_and_circular_start ... ok
+test validation::evaluator::tests::exact_alignment_prefix_capacity_enforces_the_inclusive_byte_boundary ... ok
+test validation::evaluator::tests::fitting_alignment_counts_substitution_insertion_and_deletion ... ok
+test validation::evaluator::tests::fitting_alignment_matches_exhaustive_full_score_oracle ... ok
+test validation::evaluator::tests::fitting_alignment_optimizes_published_ties_before_molecule_order ... ok
+test spool::tests::one_pass_verifier_rejects_every_truncation_boundary_and_an_append ... ok
+test validation::evaluator::tests::homopolymer_compatible_recovery_work_is_linear_in_scanned_truth ... ok
+test pairs::tests::spool_audit_admits_decode_without_charging_scan_vectors ... ok
+test validation::evaluator::tests::packed_occurrence_index_matches_longer_circular_queries ... ok
+test validation::evaluator::tests::qv_decimal_rounding_is_integer_defined_at_binary_float_boundaries ... ok
+test validation::evaluator::tests::repeated_starts_produce_compatible_bounds_not_first_start_coverage ... ok
+test validation::evaluator::tests::repetitive_truth_is_counted_without_materializing_lookup_results ... ok
+test validation::evaluator::tests::truth_order_permutation_preserves_aggregate_and_copy_bound_metrics ... ok
+test validation::evaluator::tests::tsv_cursor_enforces_exact_columns_and_inclusive_row_cap ... ok
+test validation::generator::tests::bounded_sampling_rejects_incomplete_u64_tail ... ok
+test validation::generator::tests::circular_origin_coordinates_round_trip ... ok
+test validation::generator::tests::dataset_identity_commits_every_generator_parameter ... ok
+test validation::evaluator::tests::interval_recovery_matches_brute_coordinate_materialization_exhaustively ... ok
+test validation::generator::tests::frozen_seed_vector_matches_contract ... ok
+test validation::generator::tests::generator_and_manifest_paths_share_one_feasibility_contract ... ok
+test validation::generator::tests::generator_caps_have_explicit_boundaries ... ok
+test validation::evaluator::tests::packed_occurrence_index_matches_exhaustive_oracle ... ok
+test validation::generator::tests::generator_rejects_read_base_and_conservative_output_overruns ... ok
+test validation::generator::tests::gzip_generation_passes_origin_and_error_replay ... ok
+test validation::generator::tests::independent_origin_replay_covers_linear_circular_strand_and_wrap_geometries ... ok
+test validation::generator::tests::mixture_has_exact_floor_ten_percent_minor_fragments ... ok
+test validation::generator::tests::negative_strand_error_ledger_uses_pre_error_read_orientation ... ok
+test validation::generator::tests::opposite_truth_strands_compact_to_one_reverse_complement_orbit ... ok
+test validation::generator::tests::error_profile_retains_injected_errors_while_qc_control_censors_them ... ok
+test validation::generator::tests::substitution_sampling_excludes_truth_and_reaches_each_alternative ... ok
+test validation::tests::anchored_reader_rejects_symlinked_descendants_and_survives_root_replacement ... ok
+test validation::tests::bounded_reader_accepts_limit_and_rejects_limit_plus_one ... ok
+test validation::tests::bounded_reader_does_not_follow_the_final_symlink ... ok
+test validation::tests::exact_bounded_digest_enforces_opened_length_and_limit ... ok
+test validation::tests::fasta_snapshot_digest_remains_bound_to_the_parsed_bytes ... ok
+test validation::tests::rejects_noncanonical_seed_and_paths ... ok
+test validation::tests::reverse_complement_round_trips ... ok
+test validation::tests::validation_diagnostic_is_typed_control_safe_and_single_line ... ok
+test validation::tests::validation_exit_policy_maps_every_error_family ... ok
+test validation::generator::tests::generator_is_byte_deterministic_and_separates_truth ... ok
+test validation::generator::tests::quality_seed_changes_only_quality_dependent_outputs ... ok
+test experimental::pair_path::tests::hundred_thousand_segment_chain_uses_linear_parent_arena_work ... ok
+test experimental::external_cdbg::tests::exhaustive_k3_singletons_and_pairs_and_k4_singletons_match_ascii_oracle ... ok
+test indexed_mapper::tests::exhaustive_small_dna_universe_matches_independent_oracle ... ok
+test experimental::evidence_reconstruction::tests::exhaustive_small_strings_validate_against_complete_literal_qmer_oracle ... ok
+test experimental::quality_correction::tests::exhaustive_exact_three_base_domain_matches_independent_oracle ... ok
+
+test result: ok. 545 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 9.50s
+
+     Running unittests src/main.rs (/workspace/scratch/9b3fa4aeffd8/build-target/debug/deps/veritasm-00febd30db9ec924)
+
+running 4 tests
+test tests::decimal_parser_rejects_signs_and_suffixes ... ok
+test tests::numeric_parse_errors_use_the_narrow_configuration_codes ... ok
+test tests::unknown_arguments_become_one_line_typed_errors ... ok
+test tests::help_and_version_remain_informational ... ok
+
+test result: ok. 4 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.01s
+
+     Running unittests src/bin/veritasm-evaluate.rs (/workspace/scratch/9b3fa4aeffd8/build-target/debug/deps/veritasm_evaluate-6313b50ebd1cbbb0)
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running unittests src/bin/veritasm-multik.rs (/workspace/scratch/9b3fa4aeffd8/build-target/debug/deps/veritasm_multik-40f32be00406a846)
+
+running 4 tests
+test tests::pair_fragment_limit_propagates_exactly_and_rejects_invalid_bounds ... ok
+test tests::decimal_parser_is_strict ... ok
+test tests::thread_option_is_never_silently_ignored ... ok
+test tests::malformed_k_is_typed ... ok
+
+test result: ok. 4 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running unittests src/bin/veritasm-simulate.rs (/workspace/scratch/9b3fa4aeffd8/build-target/debug/deps/veritasm_simulate-a8306e3e17f2da5b)
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests/cli.rs (/workspace/scratch/9b3fa4aeffd8/build-target/debug/deps/cli-2753dfe322d13b70)
+
+running 25 tests
+test active_destination_lease_fails_without_waiting_for_stdin_eof_or_creating_work ... ok
+test an_existing_destination_is_never_modified ... ok
+test assembles_plain_fasta_into_a_complete_evidence_bundle ... ok
+test accepts_strict_paired_fasta ... ok
+test accepts_stdin_once_and_rejects_stdin_reused_across_roles ... ok
+test diagnostics_escape_control_characters_in_paths_and_stay_on_one_line ... ok
+test detects_gzip_fasta_despite_a_fastq_filename ... ok
+test detects_concatenated_gzip_fastq_members_from_content ... ok
+test accepts_strict_paired_plain_and_gzip_lanes ... ok
+test multiple_single_end_lanes_preserve_declared_order ... ok
+test rejects_destination_paths_with_dot_or_dotdot_components ... ok
+test rejects_corrupt_truncated_later_member_and_trailing_junk_gzip ... ok
+test rejects_invalid_paired_fasta_synchronization ... ok
+test complete_bundle_is_identical_across_thread_counts ... ok
+test rejects_mismatched_and_reordered_pair_identifiers ... ok
+test rejects_missing_mates_and_role_swaps ... ok
+test even_k_self_reverse_complement_edge_cannot_create_a_hairpin_unitig ... ok
+test rejects_paired_format_mismatch_and_physical_source_reuse ... ok
+test rejects_malformed_fasta_fastq_and_nucleotide_input_without_partial_output ... ok
+test reports_quality_and_iupac_window_exclusions_without_coercion ... ok
+test successful_empty_graph_is_explicit_and_has_zero_byte_fasta ... ok
+test two_complete_pipelines_share_one_early_lease_and_only_one_consumes_work ... ok
+test paired_multilane_complete_bundle_is_identical_across_thread_counts ... ok
+test cli_enforces_header_read_and_record_boundaries ... ok
+test raw_transport_limit_boundaries_cover_file_stdin_plain_and_gzip ... ok
+
+test result: ok. 25 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 3.63s
+
+     Running tests/count_open_files.rs (/workspace/scratch/9b3fa4aeffd8/build-target/debug/deps/count_open_files-7ca709fbf4ef85a1)
+
+running 1 test
+test fan_in_merge_completes_with_low_descriptor_limit ... ok
+
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.03s
+
+     Running tests/graph_properties.rs (/workspace/scratch/9b3fa4aeffd8/build-target/debug/deps/graph_properties-3c3ac942a22f2f35)
+
+running 4 tests
+test exact_k3_subgraphs_are_deterministic_and_conservative ... ok
+test exact_k4_subgraphs_respect_self_reverse_complement_boundaries ... ok
+test bounded_exhaustive_k3_oracle_checks_maximality_ownership_cycles_and_links ... ok
+test bounded_exhaustive_k4_oracle_covers_self_reverse_complement_edges ... ok
+
+test result: ok. 4 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 2.04s
+
+     Running tests/multik_cli.rs (/workspace/scratch/9b3fa4aeffd8/build-target/debug/deps/multik_cli-fba894fc2333f4c8)
+
+running 9 tests
+test destination_lease_and_existing_result_are_fail_closed ... ok
+test paired_input_rejects_identity_order_cardinality_and_corrupt_gzip_atomically ... ok
+test retention_support_and_presentation_arguments_are_recorded_and_conflicts_are_typed ... ok
+test concurrent_writers_share_one_early_destination_lease ... ok
+test single_end_plain_and_content_gzip_are_valid_and_sequence_equivalent ... ok
+test synchronized_paired_multilane_fastq_succeeds_with_explicit_pair_scope ... ok
+test default_and_explicit_serial_execution_are_byte_deterministic_and_parallel_is_rejected ... ok
+test resource_boundaries_are_typed_and_never_publish_partial_bundles ... ok
+test paired_input_above_optional_evidence_cap_still_assembles_with_explicit_unavailability ... ok
+
+test result: ok. 9 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 5.34s
+
+     Running tests/stable_schema.rs (/workspace/scratch/9b3fa4aeffd8/build-target/debug/deps/stable_schema-fd323db3f9855af6)
+
+running 5 tests
+test test_schema_validator_fails_closed_on_unknown_schema_surface ... ok
+test stable_run_schema_rejects_name_enum_bound_missing_extra_and_conditional_mutations ... ok
+test semantic_checker_rejects_observations_above_effective_transport_limits ... ok
+test emitted_stable_bundle_passes_independent_schema_and_cross_artifact_checks ... ok
+test semantic_checker_rejects_na_order_and_cross_artifact_identifier_mutations ... ok
+
+test result: ok. 5 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.17s
+
+     Running tests/storage_integrity.rs (/workspace/scratch/9b3fa4aeffd8/build-target/debug/deps/storage_integrity-61026d203d47586b)
+
+running 2 tests
+test public_counter_rejects_every_sampled_single_bit_run_mutation ... ok
+test public_spool_verifier_rejects_every_sampled_single_bit_mutation ... ok
+
+test result: ok. 2 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.06s
+
+     Running tests/validation_cli.rs (/workspace/scratch/9b3fa4aeffd8/build-target/debug/deps/validation_cli-1503ca23412de0b3)
+
+running 22 tests
+test evaluator_accepts_empty_fastq_only_for_zero_declared_fragments ... ok
+test evaluator_rejects_input_manifest_semantic_conflicts_after_hash_verification ... ok
+test evaluator_accepts_circular_rotation_and_scores_the_seam ... ok
+test evaluator_rejects_tampered_truth_before_creating_output ... ok
+test evaluator_counts_base_error_and_nonadjacent_false_junction ... ok
+test evaluator_rejects_truth_fasta_order_drift_from_manifest_order ... ok
+test evaluator_content_root_binding_distinguishes_development_from_qualification ... ok
+test evaluator_reports_empty_output_without_fabricating_zero_denominators ... ok
+test evaluator_replays_content_detected_gzip_and_compression_changes_dataset_identity ... ok
+test evaluator_rejects_checksum_refreshed_malformed_or_semantically_fabricated_truth_ledgers ... ok
+test evaluator_rejects_noncanonical_checksum_manifest_and_admits_replay_memory_boundaries ... ok
+test evaluator_rejects_truth_separation_manifest_semantic_conflicts ... ok
+test generated_single_and_paired_reads_are_accepted_without_truth_arguments ... ok
+test validation_schema_files_are_valid_json_with_distinct_ids_or_artifacts ... ok
+test validation_cli_diagnostics_escape_controls_and_use_typed_exits ... ok
+test junction_evidence_modes_preserve_metrics_and_logical_digest ... ok
+test evaluator_rejects_many_small_records_and_aggregate_work_before_alignment ... ok
+test every_generator_v4_truth_fasta_reaches_complete_self_recovery_bounds ... ok
+test validation_tools_refuse_existing_outputs_and_resource_overruns ... ok
+test generator_v4_covers_all_built_in_cases_and_ledger_shapes ... ok
+test evaluator_streams_more_than_the_v1_junction_row_limit ... ok
+test evaluator_accepts_one_megabase_exact_linear_truth_in_summary_mode ... ok
+
+test result: ok. 22 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 34.56s
+
+     Running tests/validation_schema.rs (/workspace/scratch/9b3fa4aeffd8/build-target/debug/deps/validation_schema-4e4cca2cb216ce88)
+
+running 2 tests
+test portable_dataset_path_schema_has_the_frozen_ascii_grammar ... ok
+test emitted_json_and_tsv_artifacts_conform_to_shipped_schemas ... ok
+
+test result: ok. 2 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.06s
+
+     Running unittests examples/evaluate_exact_truth.rs (/workspace/scratch/9b3fa4aeffd8/build-target/debug/examples/evaluate_exact_truth-077512a489ccef25)
+
+running 2 tests
+test tests::exact_positions_include_overlaps ... ok
+test tests::reverse_complement_is_correct ... ok
+
+test result: ok. 2 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running unittests examples/generate_synthetic.rs (/workspace/scratch/9b3fa4aeffd8/build-target/debug/examples/generate_synthetic-d2df1c0bce33d363)
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running unittests examples/profile_indexed_mapper.rs (/workspace/scratch/9b3fa4aeffd8/build-target/debug/examples/profile_indexed_mapper-28c8b09c592f17aa)
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+    Finished `test` profile [unoptimized + debuginfo] target(s) in 0.24s
+   Doc-tests veritasm
+
+running 15 tests
+test src/bundle.rs - bundle (line 7) - compile fail ... ok
+test src/experimental/authenticated_pair_graph.rs - experimental::authenticated_pair_graph (line 11) - compile fail ... ok
+test src/experimental/authenticated_pair_graph.rs - experimental::authenticated_pair_graph (line 15) - compile fail ... ok
+test src/experimental/authenticated_pair_graph.rs - experimental::authenticated_pair_graph (line 41) - compile fail ... ok
+test src/experimental/compacted_dbg.rs - experimental::compacted_dbg::AuthenticatedCompactedGraph (line 169) - compile fail ... ok
+test src/experimental/evidence_reconstruction.rs - experimental::evidence_reconstruction::AuthenticatedWitnessedChild (line 245) - compile fail ... ok
+test src/experimental/authenticated_pair_graph.rs - experimental::authenticated_pair_graph (line 34) - compile fail ... ok
+test src/experimental/authenticated_pair_graph.rs - experimental::authenticated_pair_graph (line 22) - compile fail ... ok
+test src/experimental/multik_bundle.rs - experimental::multik_bundle (line 8) - compile fail ... ok
+test src/experimental/transition_witness.rs - experimental::transition_witness::TransitionLedger (line 171) - compile fail ... ok
+test src/experimental/evidence_reconstruction.rs - experimental::evidence_reconstruction::constrain_authenticated_compacted_child (line 572) - compile fail ... ok
+test src/experimental/retention.rs - experimental::retention::authenticate_spool_external_counts (line 637) - compile fail ... ok
+test src/experimental/spool_external.rs - experimental::spool_external::SpoolExternalResult (line 61) - compile fail ... ok
+test src/spool.rs - spool::Spool (line 48) - compile fail ... ok
+test src/experimental/transition_witness.rs - experimental::transition_witness::TransitionLedger (line 178) - compile fail ... ok
+
+test result: ok. 15 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.84s
+
+   Compiling libc v0.2.189
+    Checking getrandom v0.4.3
+    Checking tempfile v3.27.0
+    Checking veritasm v0.4.0-dev.1 (/workspace/scratch/9b3fa4aeffd8/work/veritasm-github)
+ Documenting veritasm v0.4.0-dev.1 (/workspace/scratch/9b3fa4aeffd8/work/veritasm-github)
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 20.80s
+   Generated /workspace/scratch/9b3fa4aeffd8/build-target/doc/veritasm/index.html and 3 other files
+   Compiling proc-macro2 v1.0.107
+   Compiling unicode-ident v1.0.24
+   Compiling quote v1.0.47
+   Compiling rustix v1.1.4
+   Compiling crossbeam-utils v0.8.22
+   Compiling syn v3.0.4
+   Compiling crossbeam-epoch v0.9.20
+   Compiling typenum v1.20.1
+   Compiling linux-raw-sys v0.12.1
+   Compiling cfg-if v1.0.4
+   Compiling bitflags v2.13.1
+   Compiling hybrid-array v0.4.14
+   Compiling crossbeam-deque v0.8.7
+   Compiling utf8parse v0.2.2
+   Compiling serde_core v1.0.229
+   Compiling libc v0.2.189
+   Compiling anstyle-parse v1.0.0
+   Compiling is_terminal_polyfill v1.70.2
+   Compiling rayon-core v1.13.0
+   Compiling anstyle-query v1.1.5
+   Compiling getrandom v0.4.3
+   Compiling anstyle v1.0.14
+   Compiling zmij v1.0.23
+   Compiling colorchoice v1.0.5
+   Compiling crc32fast v1.5.1
+   Compiling anstream v1.0.0
+   Compiling terminal_size v0.4.4
+   Compiling crypto-common v0.2.2
+   Compiling block-buffer v0.12.1
+   Compiling serde v1.0.229
+   Compiling serde_json v1.0.151
+   Compiling heck v0.5.0
+   Compiling simd-adler32 v0.3.10
+   Compiling strsim v0.11.1
+   Compiling const-oid v0.10.2
+   Compiling adler2 v2.0.1
+   Compiling clap_lex v1.1.0
+   Compiling thiserror v2.0.20
+   Compiling clap_builder v4.6.6
+   Compiling miniz_oxide v0.9.1
+   Compiling digest v0.11.3
+   Compiling clap_derive v4.6.4
+   Compiling thiserror-impl v2.0.20
+   Compiling serde_derive v1.0.229
+   Compiling itoa v1.0.18
+   Compiling either v1.18.0
+   Compiling memchr v2.8.3
+   Compiling cpufeatures v0.3.1
+   Compiling once_cell v1.21.4
+   Compiling fastrand v2.5.0
+   Compiling tempfile v3.27.0
+   Compiling sha2 v0.11.0
+   Compiling rayon v1.12.0
+   Compiling flate2 v1.1.10
+   Compiling clap v4.6.6
+   Compiling veritasm v0.4.0-dev.1 (/workspace/scratch/9b3fa4aeffd8/work/veritasm-github)
+    Finished `release` profile [optimized] target(s) in 3m 38s
+Smoke PASS: example artifacts, checksums, existing-output protection, malformed-input rejection.
+Checkpoint checks passed for the selected toolchain and platform.
+This does not run comparative benchmarks, fuzz campaigns, or release qualification.

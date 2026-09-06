@@ -1,0 +1,184 @@
+{
+  "inventory_schema_version": "1.2",
+  "bundle_schema_version": "1.2",
+  "manifest": {
+    "path": "manifest.sha256",
+    "algorithm": "SHA-256",
+    "line_format": "lowercase_sha256 two_spaces relative_path LF",
+    "sort": "relative_path_unsigned_byte_lexicographic_ascending",
+    "membership": "every committed regular file except manifest.sha256 itself",
+    "reject_unlisted_regular_files": true,
+    "reject_missing_listed_files": true,
+    "reject_duplicate_paths": true,
+    "reject_path_characters": [
+      "TAB",
+      "LF",
+      "CR",
+      "BACKSLASH"
+    ],
+    "reject_absolute_paths": true,
+    "reject_parent_components": true
+  },
+  "scientific_artifacts_digest": {
+    "run_json_field": "/scientific_artifacts_digest",
+    "algorithm": "SHA-256",
+    "path_sort": "unsigned_byte_lexicographic_ascending",
+    "entry_encoding": "utf8_relative_path || NUL || lowercase_file_sha256_ascii || LF",
+    "paths_in_digest_order": [
+      "assembly.gfa",
+      "pair_audit_summary.tsv",
+      "pair_links.tsv",
+      "transform_summary.tsv",
+      "unitig_evidence.tsv",
+      "unitigs.fasta"
+    ]
+  },
+  "artifacts": [
+    {
+      "path": "assembly.gfa",
+      "required": true,
+      "category": "scientific",
+      "manifest_member": true,
+      "scientific_digest_member": true,
+      "format": "GFA 1.0 subset",
+      "allowed_record_types": [
+        "H",
+        "S",
+        "L"
+      ],
+      "forbidden_record_types": [
+        "J"
+      ]
+    },
+    {
+      "path": "manifest.sha256",
+      "required": true,
+      "category": "integrity",
+      "manifest_member": false,
+      "scientific_digest_member": false,
+      "format": "GNU-style SHA-256 list"
+    },
+    {
+      "path": "pair_audit_summary.tsv",
+      "required": true,
+      "category": "scientific",
+      "manifest_member": true,
+      "scientific_digest_member": true,
+      "format": "TSV",
+      "schema": "schema/pair_audit_summary.schema.json"
+    },
+    {
+      "path": "pair_links.tsv",
+      "required": true,
+      "category": "scientific",
+      "manifest_member": true,
+      "scientific_digest_member": true,
+      "format": "TSV",
+      "schema": "schema/pair_links.schema.json"
+    },
+    {
+      "path": "report.html",
+      "required": true,
+      "category": "interpretation",
+      "manifest_member": true,
+      "scientific_digest_member": false,
+      "format": "self-contained HTML"
+    },
+    {
+      "path": "run.json",
+      "required": true,
+      "category": "interpretation",
+      "manifest_member": true,
+      "scientific_digest_member": false,
+      "format": "JSON",
+      "schema": "schema/run.schema.json"
+    },
+    {
+      "path": "schema/manifest.json",
+      "required": true,
+      "category": "schema",
+      "manifest_member": true,
+      "scientific_digest_member": false,
+      "format": "JSON artifact inventory"
+    },
+    {
+      "path": "schema/assembly_gfa.schema.json",
+      "required": true,
+      "category": "schema",
+      "manifest_member": true,
+      "scientific_digest_member": false,
+      "format": "JSON GFA descriptor"
+    },
+    {
+      "path": "schema/pair_audit_summary.schema.json",
+      "required": true,
+      "category": "schema",
+      "manifest_member": true,
+      "scientific_digest_member": false,
+      "format": "JSON TSV descriptor"
+    },
+    {
+      "path": "schema/pair_links.schema.json",
+      "required": true,
+      "category": "schema",
+      "manifest_member": true,
+      "scientific_digest_member": false,
+      "format": "JSON TSV descriptor"
+    },
+    {
+      "path": "schema/run.schema.json",
+      "required": true,
+      "category": "schema",
+      "manifest_member": true,
+      "scientific_digest_member": false,
+      "format": "JSON Schema draft 2020-12"
+    },
+    {
+      "path": "schema/transform_summary.schema.json",
+      "required": true,
+      "category": "schema",
+      "manifest_member": true,
+      "scientific_digest_member": false,
+      "format": "JSON TSV descriptor"
+    },
+    {
+      "path": "schema/unitig_evidence.schema.json",
+      "required": true,
+      "category": "schema",
+      "manifest_member": true,
+      "scientific_digest_member": false,
+      "format": "JSON TSV descriptor"
+    },
+    {
+      "path": "transform_summary.tsv",
+      "required": true,
+      "category": "scientific",
+      "manifest_member": true,
+      "scientific_digest_member": true,
+      "format": "TSV",
+      "schema": "schema/transform_summary.schema.json"
+    },
+    {
+      "path": "unitig_evidence.tsv",
+      "required": true,
+      "category": "scientific",
+      "manifest_member": true,
+      "scientific_digest_member": true,
+      "format": "TSV",
+      "schema": "schema/unitig_evidence.schema.json"
+    },
+    {
+      "path": "unitigs.fasta",
+      "required": true,
+      "category": "scientific",
+      "manifest_member": true,
+      "scientific_digest_member": true,
+      "format": "FASTA"
+    }
+  ],
+  "forbidden_stable_artifacts": [
+    "experimental_triage.json",
+    "execution.log",
+    "telemetry.json"
+  ]
+}

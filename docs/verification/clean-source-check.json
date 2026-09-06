@@ -1,0 +1,16 @@
+{
+  "name": "clean-source-check",
+  "command": [
+    "cargo",
+    "check",
+    "--locked",
+    "--all-targets",
+    "--all-features",
+    "--manifest-path",
+    "/workspace/scratch/9b3fa4aeffd8/check-clean/veritasm-github/Cargo.toml"
+  ],
+  "cwd": "/workspace/scratch/9b3fa4aeffd8",
+  "utc": "2026-09-06T04:09:14.670161+00:00",
+  "exit_code": 0,
+  "seconds": 86.59
+}

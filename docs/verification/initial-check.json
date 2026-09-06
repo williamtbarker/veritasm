@@ -1,0 +1,14 @@
+{
+  "name": "initial-check",
+  "command": [
+    "cargo",
+    "check",
+    "--locked",
+    "--all-targets",
+    "--all-features"
+  ],
+  "cwd": "/workspace/scratch/9b3fa4aeffd8/work/veritasm-github",
+  "utc": "2026-09-06T03:51:56.451715+00:00",
+  "exit_code": 0,
+  "seconds": 74.51
+}

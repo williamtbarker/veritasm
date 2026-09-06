@@ -1,0 +1,27 @@
+{
+  "descriptor_schema_version": "2.0",
+  "artifact": "evaluation_truth/errors.tsv",
+  "artifact_schema_version": "2.0",
+  "format": "tsv",
+  "encoding": "UTF-8",
+  "line_ending": "LF",
+  "final_newline": true,
+  "delimiter": "TAB",
+  "header": true,
+  "empty_data_rows_allowed": true,
+  "columns": [
+    { "name": "schema_version", "type": "literal", "value": "2.0" },
+    { "name": "read_id", "type": "opaque_ascii_identifier" },
+    { "name": "observed_offset_zero_based", "type": "u64_decimal" },
+    { "name": "truth_coordinate_zero_based", "type": "u64_decimal" },
+    { "name": "error_kind", "type": "literal", "value": "substitution" },
+    {
+      "name": "truth_base",
+      "type": "enum",
+      "values": ["A", "C", "G", "T"],
+      "description": "Pre-error base in emitted read orientation: the FASTA base on + and its complement on -."
+    },
+    { "name": "observed_base", "type": "enum", "values": ["A", "C", "G", "T"] }
+  ],
+  "sort_key": ["fragment/read emission order", "observed_offset_zero_based numeric"]
+}

@@ -1,0 +1,18 @@
+cff-version: 1.2.0
+message: "If you use this software, please cite its version and source commit."
+title: "VeritAsm"
+type: software
+authors:
+  - family-names: "Barker"
+    given-names: "William"
+version: "0.4.0-dev.1"
+license: MIT
+abstract: >-
+  A Rust framework for deterministic short-read assembly and inspectable
+  graph, support, read-placement and paired-read evidence.
+keywords:
+  - bioinformatics
+  - de Bruijn graph
+  - de novo assembly
+  - genome assembly
+  - Rust

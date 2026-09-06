@@ -1,0 +1,763 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://veritasm.invalid/schema/run-1.2.json",
+  "title": "VeritAsm deterministic run record 1.2",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "software",
+    "status",
+    "input",
+    "spool",
+    "parameters",
+    "windows",
+    "counting",
+    "graph",
+    "read_audit",
+    "pair_audit",
+    "transformations",
+    "interpretation",
+    "warnings",
+    "limitations",
+    "scientific_artifacts_digest"
+  ],
+  "x-property-order": [
+    "schema_version",
+    "software",
+    "status",
+    "input",
+    "spool",
+    "parameters",
+    "windows",
+    "counting",
+    "graph",
+    "read_audit",
+    "pair_audit",
+    "transformations",
+    "interpretation",
+    "warnings",
+    "limitations",
+    "scientific_artifacts_digest"
+  ],
+  "properties": {
+    "schema_version": { "const": "1.2" },
+    "software": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["name", "version", "rust_msrv"],
+      "x-property-order": ["name", "version", "rust_msrv"],
+      "properties": {
+        "name": { "const": "veritasm" },
+        "version": { "type": "string", "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+(?:[-+][0-9A-Za-z.-]+)?$" },
+        "rust_msrv": { "const": "1.85" }
+      }
+    },
+    "status": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["code", "message"],
+      "x-property-order": ["code", "message"],
+      "properties": {
+        "code": {
+          "enum": [
+            "software_run_complete",
+            "software_run_complete_no_unitigs_under_parameters"
+          ]
+        },
+        "message": {
+          "enum": [
+            "Software run completed under the recorded parameters.",
+            "No sequence met the recorded assembly rules; this is not biological absence."
+          ]
+        }
+      },
+      "allOf": [
+        {
+          "if": { "properties": { "code": { "const": "software_run_complete_no_unitigs_under_parameters" } } },
+          "then": { "properties": { "message": { "const": "No sequence met the recorded assembly rules; this is not biological absence." } } }
+        },
+        {
+          "if": { "properties": { "code": { "const": "software_run_complete" } } },
+          "then": { "properties": { "message": { "const": "Software run completed under the recorded parameters." } } }
+        }
+      ]
+    },
+    "input": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "mode",
+        "lane_count_decimal",
+        "fragments_decimal",
+        "reads_decimal",
+        "bases_decimal",
+        "raw_transport_bytes_decimal",
+        "decoded_input_bytes_decimal",
+        "inferred_mate_roles_decimal",
+        "gzip_sources_decimal",
+        "gzip_members_decimal",
+        "sources"
+      ],
+      "x-property-order": [
+        "mode",
+        "lane_count_decimal",
+        "fragments_decimal",
+        "reads_decimal",
+        "bases_decimal",
+        "raw_transport_bytes_decimal",
+        "decoded_input_bytes_decimal",
+        "inferred_mate_roles_decimal",
+        "gzip_sources_decimal",
+        "gzip_members_decimal",
+        "sources"
+      ],
+      "properties": {
+        "mode": { "enum": ["single_end", "paired_end"] },
+        "lane_count_decimal": { "$ref": "#/$defs/u64" },
+        "fragments_decimal": { "$ref": "#/$defs/u64" },
+        "reads_decimal": { "$ref": "#/$defs/u64" },
+        "bases_decimal": { "$ref": "#/$defs/u64" },
+        "raw_transport_bytes_decimal": { "$ref": "#/$defs/positive_u64" },
+        "decoded_input_bytes_decimal": { "$ref": "#/$defs/positive_u64" },
+        "inferred_mate_roles_decimal": { "$ref": "#/$defs/u64" },
+        "gzip_sources_decimal": { "$ref": "#/$defs/u64" },
+        "gzip_members_decimal": { "$ref": "#/$defs/u64" },
+        "sources": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/source" },
+          "minItems": 1,
+          "x-sort-key": ["lane_ordinal_numeric", "role_order_S_R1_R2"]
+        }
+      }
+    },
+    "spool": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["schema_version", "sha256", "fragments_decimal", "reads_decimal", "bytes_decimal"],
+      "x-property-order": ["schema_version", "sha256", "fragments_decimal", "reads_decimal", "bytes_decimal"],
+      "properties": {
+        "schema_version": { "const": "1" },
+        "sha256": { "$ref": "#/$defs/sha256" },
+        "fragments_decimal": { "$ref": "#/$defs/u64" },
+        "reads_decimal": { "$ref": "#/$defs/u64" },
+        "bytes_decimal": { "$ref": "#/$defs/u64" }
+      }
+    },
+    "parameters": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["k", "profile", "support_unit", "retention_min_support_decimal", "min_base_quality", "remap", "limits"],
+      "x-property-order": ["k", "profile", "support_unit", "retention_min_support_decimal", "min_base_quality", "remap", "limits"],
+      "properties": {
+        "k": { "type": "integer", "minimum": 3, "maximum": 63 },
+        "profile": { "enum": ["retain_all", "thresholded", "custom"] },
+        "support_unit": { "$ref": "#/$defs/support_unit" },
+        "retention_min_support_decimal": { "$ref": "#/$defs/positive_u64" },
+        "min_base_quality": { "type": "integer", "minimum": 0, "maximum": 93 },
+        "remap": { "type": "boolean" },
+        "limits": { "$ref": "#/$defs/limits" }
+      }
+    },
+    "windows": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "possible_decimal",
+        "accepted_decimal",
+        "ambiguity_only_decimal",
+        "quality_only_decimal",
+        "ambiguity_and_quality_decimal",
+        "fasta_quality_rule"
+      ],
+      "x-property-order": [
+        "possible_decimal",
+        "accepted_decimal",
+        "ambiguity_only_decimal",
+        "quality_only_decimal",
+        "ambiguity_and_quality_decimal",
+        "fasta_quality_rule"
+      ],
+      "properties": {
+        "possible_decimal": { "$ref": "#/$defs/u64" },
+        "accepted_decimal": { "$ref": "#/$defs/u64" },
+        "ambiguity_only_decimal": { "$ref": "#/$defs/u64" },
+        "quality_only_decimal": { "$ref": "#/$defs/u64" },
+        "ambiguity_and_quality_decimal": { "$ref": "#/$defs/u64" },
+        "fasta_quality_rule": { "const": "not_applicable_to_fasta" }
+      },
+      "x-invariant": "possible_decimal equals the checked sum of the other four window-count fields"
+    },
+    "counting": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "algorithm_id",
+        "algorithm_version",
+        "path",
+        "observed_distinct_canonical_keys_decimal",
+        "observed_support_mass_decimal",
+        "retained_distinct_canonical_keys_decimal",
+        "retained_support_mass_decimal",
+        "support_histogram"
+      ],
+      "x-property-order": [
+        "algorithm_id",
+        "algorithm_version",
+        "path",
+        "observed_distinct_canonical_keys_decimal",
+        "observed_support_mass_decimal",
+        "retained_distinct_canonical_keys_decimal",
+        "retained_support_mass_decimal",
+        "support_histogram"
+      ],
+      "properties": {
+        "algorithm_id": { "const": "exact_external_range_partition" },
+        "algorithm_version": { "const": "1" },
+        "path": { "const": "no_sieve_exact" },
+        "observed_distinct_canonical_keys_decimal": { "$ref": "#/$defs/u64" },
+        "observed_support_mass_decimal": { "$ref": "#/$defs/u64" },
+        "retained_distinct_canonical_keys_decimal": { "$ref": "#/$defs/u64" },
+        "retained_support_mass_decimal": { "$ref": "#/$defs/u64" },
+        "support_histogram": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/histogram_bin" },
+          "x-sort-key": ["support_decimal_numeric_ascending"]
+        }
+      }
+    },
+    "graph": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "retained_canonical_keys_decimal",
+        "retained_support_mass_decimal",
+        "oriented_handles_decimal",
+        "self_reverse_complement_keys_decimal",
+        "unitigs_decimal",
+        "linear_unitigs_decimal",
+        "closed_graph_walks_decimal",
+        "graph_links_decimal"
+      ],
+      "x-property-order": [
+        "retained_canonical_keys_decimal",
+        "retained_support_mass_decimal",
+        "oriented_handles_decimal",
+        "self_reverse_complement_keys_decimal",
+        "unitigs_decimal",
+        "linear_unitigs_decimal",
+        "closed_graph_walks_decimal",
+        "graph_links_decimal"
+      ],
+      "properties": {
+        "retained_canonical_keys_decimal": { "$ref": "#/$defs/u64" },
+        "retained_support_mass_decimal": { "$ref": "#/$defs/u64" },
+        "oriented_handles_decimal": { "$ref": "#/$defs/u64" },
+        "self_reverse_complement_keys_decimal": { "$ref": "#/$defs/u64" },
+        "unitigs_decimal": { "$ref": "#/$defs/u64" },
+        "linear_unitigs_decimal": { "$ref": "#/$defs/u64" },
+        "closed_graph_walks_decimal": { "$ref": "#/$defs/u64" },
+        "graph_links_decimal": { "$ref": "#/$defs/u64" }
+      },
+      "x-invariants": [
+        "oriented_handles_decimal = 2 * retained_canonical_keys_decimal - self_reverse_complement_keys_decimal",
+        "unitigs_decimal = linear_unitigs_decimal + closed_graph_walks_decimal"
+      ]
+    },
+    "read_audit": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["mapper", "global_enumeration_status", "state_counts", "placement_totals"],
+      "x-property-order": ["mapper", "global_enumeration_status", "state_counts", "placement_totals"],
+      "properties": {
+        "mapper": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "algorithm_id",
+            "algorithm_version",
+            "target_universe",
+            "seed_length",
+            "execution_status",
+            "linear_targets_decimal",
+            "index_postings_decimal",
+            "accounted_index_bytes_decimal",
+            "max_mapping_candidates_decimal"
+          ],
+          "x-property-order": [
+            "algorithm_id",
+            "algorithm_version",
+            "target_universe",
+            "seed_length",
+            "execution_status",
+            "linear_targets_decimal",
+            "index_postings_decimal",
+            "accounted_index_bytes_decimal",
+            "max_mapping_candidates_decimal"
+          ],
+          "properties": {
+            "algorithm_id": { "const": "literal_rarest_seed_zero_mismatch" },
+            "algorithm_version": { "const": "1" },
+            "target_universe": { "const": "all_emitted_linear_unitigs_only" },
+            "seed_length": { "const": 15 },
+            "execution_status": { "enum": ["executed", "not_requested"] },
+            "linear_targets_decimal": { "$ref": "#/$defs/u64" },
+            "index_postings_decimal": { "$ref": "#/$defs/u64" },
+            "accounted_index_bytes_decimal": { "$ref": "#/$defs/u64" },
+            "max_mapping_candidates_decimal": { "$ref": "#/$defs/positive_u64" }
+          },
+          "x-invariants": [
+            "parameters.remap=true implies execution_status=executed, linear_targets_decimal=graph.linear_unitigs_decimal, and accounted_index_bytes_decimal>0",
+            "parameters.remap=false implies execution_status=not_requested and all three index accounting decimals are zero",
+            "index_postings_decimal is the sum over linear unitigs of max(0, emitted_sequence_length-seed_length+1)"
+          ]
+        },
+        "global_enumeration_status": {
+          "enum": ["placement_enumeration_complete", "indeterminate_candidate_limit", "unavailable_remap_disabled"]
+        },
+        "state_counts": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/read_state_count" },
+          "x-sort-key": ["mate_role_order_S_R1_R2", "read_state_declared_order"],
+          "x-conditional-row-sets": {
+            "single_end_remap_disabled": ["S:not_requested"],
+            "paired_end_remap_disabled": ["R1:not_requested", "R2:not_requested"],
+            "single_end_remap_enabled": [
+              "S:ineligible_ambiguity_or_quality",
+              "S:indeterminate_candidate_limit",
+              "S:unmapped",
+              "S:single_placement_group",
+              "S:multiple_placement_groups"
+            ],
+            "paired_end_remap_enabled": [
+              "R1:ineligible_ambiguity_or_quality",
+              "R1:indeterminate_candidate_limit",
+              "R1:unmapped",
+              "R1:single_placement_group",
+              "R1:multiple_placement_groups",
+              "R2:ineligible_ambiguity_or_quality",
+              "R2:indeterminate_candidate_limit",
+              "R2:unmapped",
+              "R2:single_placement_group",
+              "R2:multiple_placement_groups"
+            ]
+          }
+        },
+        "placement_totals": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "enumeration_complete_read_placements",
+            "single_group_read_instances",
+            "multi_group_read_instance_unitig_memberships"
+          ],
+          "x-property-order": [
+            "enumeration_complete_read_placements",
+            "single_group_read_instances",
+            "multi_group_read_instance_unitig_memberships"
+          ],
+          "properties": {
+            "enumeration_complete_read_placements": { "$ref": "#/$defs/u64_or_na" },
+            "single_group_read_instances": { "$ref": "#/$defs/u64_or_na" },
+            "multi_group_read_instance_unitig_memberships": { "$ref": "#/$defs/u64_or_na" }
+          }
+        }
+      }
+    },
+    "pair_audit": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["mode", "state_counts", "lane_state_counts", "link_groups_decimal", "link_support_decimal", "reconciliation"],
+      "x-property-order": ["mode", "state_counts", "lane_state_counts", "link_groups_decimal", "link_support_decimal", "reconciliation"],
+      "properties": {
+        "mode": { "enum": ["not_paired_input", "remap_not_requested", "paired_remap_enabled"] },
+        "state_counts": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/pair_state_count" },
+          "minItems": 1,
+          "x-sort-key": ["applicable_pair_state_order"]
+        },
+        "lane_state_counts": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/pair_lane_state_count" },
+          "minItems": 1,
+          "x-sort-key": ["lane_ordinal_numeric_ascending", "applicable_pair_state_order"],
+          "x-invariants": [
+            "Every input lane emits the complete conditional state set, including zero-count states.",
+            "Counts for each lane sum to the synchronized fragment count recorded by that lane's source catalogue entries.",
+            "Summing every lane row by state exactly reproduces state_counts."
+          ]
+        },
+        "link_groups_decimal": { "$ref": "#/$defs/u64" },
+        "link_support_decimal": { "$ref": "#/$defs/u64" },
+        "reconciliation": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "states_sum_to_input_fragments",
+            "lane_states_sum_to_lane_fragments",
+            "lane_state_sums_equal_global_states",
+            "link_support_equals_cross_unitig_state",
+            "lane_link_support_equals_lane_cross_unitig_state"
+          ],
+          "x-property-order": [
+            "states_sum_to_input_fragments",
+            "lane_states_sum_to_lane_fragments",
+            "lane_state_sums_equal_global_states",
+            "link_support_equals_cross_unitig_state",
+            "lane_link_support_equals_lane_cross_unitig_state"
+          ],
+          "properties": {
+            "states_sum_to_input_fragments": { "const": true },
+            "lane_states_sum_to_lane_fragments": { "const": true },
+            "lane_state_sums_equal_global_states": { "const": true },
+            "link_support_equals_cross_unitig_state": { "const": true },
+            "lane_link_support_equals_lane_cross_unitig_state": { "const": true }
+          }
+        }
+      }
+    },
+    "transformations": {
+      "type": "array",
+      "minItems": 2,
+      "maxItems": 2,
+      "items": { "$ref": "#/$defs/transformation" },
+      "x-sort-key": ["stage_order_numeric_ascending"],
+      "x-invariant": "contains stage 0 exact_count_observation and stage 1 absolute_support_retention"
+    },
+    "interpretation": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "scientific_scope",
+        "evidence_source",
+        "evidence_interpretation",
+        "support_unit",
+        "biological_call",
+        "taxonomy",
+        "control_context",
+        "disclaimer"
+      ],
+      "x-property-order": [
+        "scientific_scope",
+        "evidence_source",
+        "evidence_interpretation",
+        "support_unit",
+        "biological_call",
+        "taxonomy",
+        "control_context",
+        "disclaimer"
+      ],
+      "properties": {
+        "scientific_scope": { "const": "algorithmic_unitig_reconstruction" },
+        "evidence_source": { "const": "construction_reads" },
+        "evidence_interpretation": { "const": "internal_consistency_not_independent_validation" },
+        "support_unit": { "$ref": "#/$defs/support_unit" },
+        "biological_call": { "const": "not_performed" },
+        "taxonomy": { "const": "not_performed" },
+        "control_context": { "const": "not_supplied" },
+        "disclaimer": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["version", "text"],
+          "x-property-order": ["version", "text"],
+          "properties": {
+            "version": { "const": "veritasm-disclaimer-1" },
+            "text": {
+              "const": "VeritAsm is unvalidated research software. It reconstructs algorithm-defined unitigs and reports internal consistency from the same supplied reads used for construction. It does not detect or identify an organism; establish biological presence or absence, viability, infectivity, sample sterility, or product safety; determine product disposition; or replace a validated or compendial method. Regulatory and standards references describe the surrounding workflow only and do not state or imply compliance, approval, clearance, qualification, validation, or fitness for a regulated purpose."
+            }
+          }
+        }
+      }
+    },
+    "warnings": {
+      "type": "array",
+      "maxItems": 0,
+      "items": false
+    },
+    "limitations": {
+      "type": "array",
+      "prefixItems": [
+        { "const": "Closed graph walks are not audited by construction-read remapping." },
+        { "const": "Construction-read remapping is internal consistency, not independent validation." },
+        { "const": "Pairs are reported as observations and never create joins." },
+        { "const": "Results do not establish biological identity, presence, absence, viability, infectivity, safety, or product disposition." }
+      ],
+      "minItems": 4,
+      "maxItems": 4,
+      "items": false,
+      "x-sort-key": ["fixed_schema_order"]
+    },
+    "scientific_artifacts_digest": { "$ref": "#/$defs/sha256" }
+  },
+  "$defs": {
+    "u64": {
+      "type": "string",
+      "pattern": "^(0|[1-9][0-9]{0,19})$",
+      "x-maximum-decimal": "18446744073709551615"
+    },
+    "positive_u64": {
+      "type": "string",
+      "pattern": "^[1-9][0-9]{0,19}$",
+      "x-maximum-decimal": "18446744073709551615"
+    },
+    "sha256": { "type": "string", "pattern": "^[0-9a-f]{64}$" },
+    "support_unit": {
+      "enum": ["supplied_fragment_instance", "accepted_window_occurrence"]
+    },
+    "na": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["status", "reason"],
+      "x-property-order": ["status", "reason"],
+      "properties": {
+        "status": { "const": "not_available" },
+        "reason": {
+          "enum": ["remap_disabled", "candidate_limit"]
+        }
+      }
+    },
+    "u64_or_na": {
+      "oneOf": [
+        { "$ref": "#/$defs/u64" },
+        { "$ref": "#/$defs/na" }
+      ]
+    },
+    "source": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "lane_ordinal",
+        "role",
+        "label",
+        "format",
+        "raw_transport_sha256",
+        "logical_decoded_sha256",
+        "records_decimal",
+        "bases_decimal"
+      ],
+      "x-property-order": [
+        "lane_ordinal",
+        "role",
+        "label",
+        "format",
+        "raw_transport_sha256",
+        "logical_decoded_sha256",
+        "records_decimal",
+        "bases_decimal"
+      ],
+      "properties": {
+        "lane_ordinal": { "type": "integer", "minimum": 0, "maximum": 4294967295 },
+        "role": { "enum": ["S", "R1", "R2"] },
+        "label": { "type": "string", "pattern": "^lane-[0-9]{6}-(S|R1|R2)$" },
+        "format": { "enum": ["fasta", "fastq"] },
+        "raw_transport_sha256": { "$ref": "#/$defs/sha256" },
+        "logical_decoded_sha256": { "$ref": "#/$defs/sha256" },
+        "records_decimal": { "$ref": "#/$defs/u64" },
+        "bases_decimal": { "$ref": "#/$defs/u64" }
+      }
+    },
+    "limits": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "max_header_bytes_decimal",
+        "max_read_bases_decimal",
+        "max_record_bytes_decimal",
+        "max_raw_transport_bytes_decimal",
+        "max_decoded_input_bytes_decimal",
+        "max_gzip_members_decimal",
+        "batch_fragments_decimal",
+        "memory_budget_bytes_decimal",
+        "max_spool_bytes_decimal",
+        "max_temp_bytes_decimal",
+        "partition_prefix_bits",
+        "sort_buffer_keys_decimal",
+        "merge_fan_in",
+        "max_count_open_files",
+        "max_runs_decimal",
+        "max_manifest_bytes_decimal",
+        "max_retained_kmers_decimal",
+        "max_mapping_candidates_decimal",
+        "max_staged_output_bytes_decimal",
+        "html_max_unitig_rows_decimal"
+      ],
+      "x-property-order": [
+        "max_header_bytes_decimal",
+        "max_read_bases_decimal",
+        "max_record_bytes_decimal",
+        "max_raw_transport_bytes_decimal",
+        "max_decoded_input_bytes_decimal",
+        "max_gzip_members_decimal",
+        "batch_fragments_decimal",
+        "memory_budget_bytes_decimal",
+        "max_spool_bytes_decimal",
+        "max_temp_bytes_decimal",
+        "partition_prefix_bits",
+        "sort_buffer_keys_decimal",
+        "merge_fan_in",
+        "max_count_open_files",
+        "max_runs_decimal",
+        "max_manifest_bytes_decimal",
+        "max_retained_kmers_decimal",
+        "max_mapping_candidates_decimal",
+        "max_staged_output_bytes_decimal",
+        "html_max_unitig_rows_decimal"
+      ],
+      "properties": {
+        "max_header_bytes_decimal": { "$ref": "#/$defs/positive_u64" },
+        "max_read_bases_decimal": { "$ref": "#/$defs/positive_u64" },
+        "max_record_bytes_decimal": { "$ref": "#/$defs/positive_u64" },
+        "max_raw_transport_bytes_decimal": { "$ref": "#/$defs/positive_u64" },
+        "max_decoded_input_bytes_decimal": { "$ref": "#/$defs/positive_u64" },
+        "max_gzip_members_decimal": { "$ref": "#/$defs/positive_u64" },
+        "batch_fragments_decimal": { "$ref": "#/$defs/positive_u64" },
+        "memory_budget_bytes_decimal": { "$ref": "#/$defs/positive_u64" },
+        "max_spool_bytes_decimal": { "$ref": "#/$defs/positive_u64" },
+        "max_temp_bytes_decimal": { "$ref": "#/$defs/positive_u64" },
+        "partition_prefix_bits": { "type": "integer", "minimum": 0, "maximum": 8 },
+        "sort_buffer_keys_decimal": { "$ref": "#/$defs/positive_u64" },
+        "merge_fan_in": { "const": 16 },
+        "max_count_open_files": { "const": 17 },
+        "max_runs_decimal": { "$ref": "#/$defs/positive_u64" },
+        "max_manifest_bytes_decimal": { "$ref": "#/$defs/positive_u64" },
+        "max_retained_kmers_decimal": { "$ref": "#/$defs/positive_u64" },
+        "max_mapping_candidates_decimal": { "$ref": "#/$defs/positive_u64" },
+        "max_staged_output_bytes_decimal": { "$ref": "#/$defs/positive_u64" },
+        "html_max_unitig_rows_decimal": { "$ref": "#/$defs/u64" }
+      }
+    },
+    "histogram_bin": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["support_decimal", "distinct_canonical_keys_decimal"],
+      "x-property-order": ["support_decimal", "distinct_canonical_keys_decimal"],
+      "properties": {
+        "support_decimal": { "$ref": "#/$defs/positive_u64" },
+        "distinct_canonical_keys_decimal": { "$ref": "#/$defs/positive_u64" }
+      }
+    },
+    "read_state_count": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["mate_role", "state", "read_instances_decimal"],
+      "x-property-order": ["mate_role", "state", "read_instances_decimal"],
+      "properties": {
+        "mate_role": { "enum": ["S", "R1", "R2"] },
+        "state": {
+          "enum": [
+            "not_requested",
+            "ineligible_ambiguity_or_quality",
+            "indeterminate_candidate_limit",
+            "unmapped",
+            "single_placement_group",
+            "multiple_placement_groups"
+          ]
+        },
+        "read_instances_decimal": { "$ref": "#/$defs/u64" }
+      }
+    },
+    "pair_state_count": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["state", "supplied_fragment_instances_decimal"],
+      "x-property-order": ["state", "supplied_fragment_instances_decimal"],
+      "properties": {
+        "state": {
+          "enum": [
+            "remap_not_requested",
+            "mate_ineligible",
+            "mate_indeterminate_candidate_limit",
+            "mate_unmapped",
+            "mate_multiple_placement_groups",
+            "same_linear_unitig",
+            "endpoint_tie",
+            "cross_unitig_observation",
+            "not_paired_input"
+          ]
+        },
+        "supplied_fragment_instances_decimal": { "$ref": "#/$defs/u64" }
+      }
+    },
+    "pair_lane_state_count": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["lane_ordinal", "state", "supplied_fragment_instances_decimal"],
+      "x-property-order": ["lane_ordinal", "state", "supplied_fragment_instances_decimal"],
+      "properties": {
+        "lane_ordinal": { "type": "integer", "minimum": 0, "maximum": 4294967295 },
+        "state": {
+          "enum": [
+            "remap_not_requested",
+            "mate_ineligible",
+            "mate_indeterminate_candidate_limit",
+            "mate_unmapped",
+            "mate_multiple_placement_groups",
+            "same_linear_unitig",
+            "endpoint_tie",
+            "cross_unitig_observation",
+            "not_paired_input"
+          ]
+        },
+        "supplied_fragment_instances_decimal": { "$ref": "#/$defs/u64" }
+      }
+    },
+    "transformation": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "stage_order",
+        "algorithm_id",
+        "algorithm_version",
+        "support_unit",
+        "parameters_json",
+        "input_distinct_canonical_keys_decimal",
+        "output_distinct_canonical_keys_decimal",
+        "input_support_mass_decimal",
+        "output_support_mass_decimal",
+        "removed_key_count_decimal",
+        "removed_support_mass_decimal",
+        "decision_set_sha256",
+        "pre_state_sha256",
+        "post_state_sha256",
+        "status"
+      ],
+      "x-property-order": [
+        "stage_order",
+        "algorithm_id",
+        "algorithm_version",
+        "support_unit",
+        "parameters_json",
+        "input_distinct_canonical_keys_decimal",
+        "output_distinct_canonical_keys_decimal",
+        "input_support_mass_decimal",
+        "output_support_mass_decimal",
+        "removed_key_count_decimal",
+        "removed_support_mass_decimal",
+        "decision_set_sha256",
+        "pre_state_sha256",
+        "post_state_sha256",
+        "status"
+      ],
+      "properties": {
+        "stage_order": { "type": "integer", "minimum": 0, "maximum": 1 },
+        "algorithm_id": { "enum": ["exact_count_observation", "absolute_support_retention"] },
+        "algorithm_version": { "const": "1" },
+        "support_unit": { "$ref": "#/$defs/support_unit" },
+        "parameters_json": { "type": "string", "pattern": "^\\{.*\\}$" },
+        "input_distinct_canonical_keys_decimal": { "$ref": "#/$defs/u64" },
+        "output_distinct_canonical_keys_decimal": { "$ref": "#/$defs/u64" },
+        "input_support_mass_decimal": { "$ref": "#/$defs/u64" },
+        "output_support_mass_decimal": { "$ref": "#/$defs/u64" },
+        "removed_key_count_decimal": { "$ref": "#/$defs/u64" },
+        "removed_support_mass_decimal": { "$ref": "#/$defs/u64" },
+        "decision_set_sha256": { "$ref": "#/$defs/sha256" },
+        "pre_state_sha256": { "$ref": "#/$defs/sha256" },
+        "post_state_sha256": { "$ref": "#/$defs/sha256" },
+        "status": {
+          "enum": ["software_stage_complete_no_change", "software_stage_complete_with_change"]
+        }
+      }
+    }
+  }
+}

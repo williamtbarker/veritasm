@@ -1,0 +1,71 @@
+{
+  "descriptor_schema_version": "1.0",
+  "artifact": "transform_summary.tsv",
+  "artifact_schema_version": "1.0",
+  "format": "tsv",
+  "encoding": "UTF-8",
+  "line_ending": "LF",
+  "final_newline": true,
+  "delimiter": "TAB",
+  "header": true,
+  "missing_value": null,
+  "columns": [
+    { "name": "schema_version", "type": "literal", "value": "1.0" },
+    { "name": "stage_order", "type": "u8_decimal", "minimum": "0", "maximum": "1" },
+    { "name": "algorithm_id", "type": "ordered_enum", "values": ["exact_count_observation", "absolute_support_retention"] },
+    { "name": "algorithm_version", "type": "literal", "value": "1" },
+    { "name": "support_unit", "type": "enum", "values": ["supplied_fragment_instance", "accepted_window_occurrence"] },
+    { "name": "parameters_json", "type": "canonical_json_object" },
+    { "name": "input_distinct_canonical_keys", "type": "u64_decimal", "minimum": "0" },
+    { "name": "output_distinct_canonical_keys", "type": "u64_decimal", "minimum": "0" },
+    { "name": "input_support_mass", "type": "u64_decimal", "minimum": "0" },
+    { "name": "output_support_mass", "type": "u64_decimal", "minimum": "0" },
+    { "name": "removed_key_count", "type": "u64_decimal", "minimum": "0" },
+    { "name": "removed_support_mass", "type": "u64_decimal", "minimum": "0" },
+    { "name": "decision_set_sha256", "type": "lowercase_sha256", "pattern": "^[0-9a-f]{64}$" },
+    { "name": "pre_state_sha256", "type": "lowercase_sha256", "pattern": "^[0-9a-f]{64}$" },
+    { "name": "post_state_sha256", "type": "lowercase_sha256", "pattern": "^[0-9a-f]{64}$" },
+    {
+      "name": "status",
+      "type": "enum",
+      "values": ["software_stage_complete_no_change", "software_stage_complete_with_change"]
+    }
+  ],
+  "stages": [
+    {
+      "stage_order": "0",
+      "algorithm_id": "exact_count_observation",
+      "algorithm_version": "1",
+      "parameters_json_literal": "{}",
+      "required_effect": "no_change"
+    },
+    {
+      "stage_order": "1",
+      "algorithm_id": "absolute_support_retention",
+      "algorithm_version": "1",
+      "parameters_json_grammar": "{\"retention_min_support_decimal\":\"<u64>\",\"support_unit\":\"<support_unit>\"}",
+      "required_effect": "measured_change_or_no_change"
+    }
+  ],
+  "digest_framing": {
+    "graph_state": "veritasm:graph-state:v1 NUL || k_u8 || support_unit_tag_u8 || record_count_u64_le || sorted_records",
+    "decision_set": "veritasm:decision-set:v1 NUL || k_u8 || support_unit_tag_u8 || stage_order_u8 || record_count_u64_le || sorted_records",
+    "record": "canonical_key_u128_be || support_u64_le",
+    "support_unit_tags": {
+      "supplied_fragment_instance": 0,
+      "accepted_window_occurrence": 1
+    }
+  },
+  "file_constraints": [
+    "Exactly the two declared stages are emitted, including no-op stages.",
+    "No tip, bubble, low-complexity deletion, correction, Bloom, or other transformation row is permitted in schema 1.0.",
+    "parameters_json is compact JSON with keys in unsigned-byte lexical order.",
+    "decision_set_sha256 authenticates the complete sorted removed (full_key,support) decision set, including the framed empty set.",
+    "Stage 0 input and output counts, support mass, and state digests are equal and both removed quantities are zero.",
+    "Stage 1 removals reconcile exactly to its input and output quantities.",
+    "Status is software_stage_complete_no_change exactly when sorted input and output streams are byte-identical and both removed quantities are zero; otherwise it is software_stage_complete_with_change."
+  ],
+  "sort_key": [
+    { "field": "stage_order", "comparison": "numeric", "direction": "ascending" }
+  ]
+}

@@ -1,0 +1,58 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://veritasm.invalid/schema/validation-experiment-v1.json",
+  "title": "VeritAsm frozen validation experiment manifest v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "experiment_id",
+    "plan",
+    "dataset",
+    "truth",
+    "generation",
+    "tool",
+    "adapter",
+    "evaluator",
+    "resources",
+    "randomization",
+    "metrics",
+    "exclusions",
+    "stopping_rules",
+    "expected_artifacts"
+  ],
+  "properties": {
+    "schema_version": { "const": "veritasm-experiment-manifest-v1" },
+    "experiment_id": { "type": "string", "pattern": "^[A-Za-z0-9._-]+$" },
+    "plan": { "$ref": "#/$defs/nonempty_object" },
+    "dataset": { "$ref": "#/$defs/nonempty_object" },
+    "truth": { "$ref": "#/$defs/nonempty_object" },
+    "generation": { "$ref": "#/$defs/nonempty_object" },
+    "tool": { "$ref": "#/$defs/nonempty_object" },
+    "adapter": { "$ref": "#/$defs/nonempty_object" },
+    "evaluator": { "$ref": "#/$defs/nonempty_object" },
+    "resources": { "$ref": "#/$defs/nonempty_object" },
+    "randomization": { "$ref": "#/$defs/nonempty_object" },
+    "metrics": { "$ref": "#/$defs/nonempty_object" },
+    "exclusions": { "type": "array", "items": { "type": "object" } },
+    "stopping_rules": { "$ref": "#/$defs/nonempty_object" },
+    "expected_artifacts": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["path", "required", "category"],
+        "properties": {
+          "path": { "type": "string", "minLength": 1 },
+          "required": { "type": "boolean" },
+          "category": { "type": "string", "minLength": 1 }
+        }
+      }
+    }
+  },
+  "$defs": {
+    "nonempty_object": { "type": "object", "minProperties": 1 }
+  },
+  "x-freeze-rule": "Hash the canonical saved manifest before any assembler receives reads; append outcomes only to a separate result record."
+}

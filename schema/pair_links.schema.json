@@ -1,0 +1,58 @@
+{
+  "descriptor_schema_version": "1.0",
+  "artifact": "pair_links.tsv",
+  "artifact_schema_version": "1.1",
+  "format": "tsv",
+  "encoding": "UTF-8",
+  "line_ending": "LF",
+  "final_newline": true,
+  "delimiter": "TAB",
+  "header": true,
+  "empty_data_rows_allowed": true,
+  "missing_value": null,
+  "columns": [
+    { "name": "schema_version", "type": "literal", "value": "1.1" },
+    { "name": "k", "type": "u8_decimal", "minimum": "3", "maximum": "63" },
+    { "name": "lane_ordinal", "type": "u32_decimal", "minimum": "0", "maximum": "4294967295" },
+    { "name": "segment_a", "type": "stable_content_derived_identifier", "pattern": "^utg-[0-9a-f]{64}$" },
+    { "name": "end_a", "type": "ordered_enum", "values": ["L", "R"] },
+    { "name": "strand_a", "type": "ordered_enum", "values": ["+", "-"] },
+    { "name": "end_distance_a", "type": "u64_decimal", "minimum": "0" },
+    { "name": "mate_role_a", "type": "ordered_enum", "values": ["R1", "R2"] },
+    { "name": "segment_b", "type": "stable_content_derived_identifier", "pattern": "^utg-[0-9a-f]{64}$" },
+    { "name": "end_b", "type": "ordered_enum", "values": ["L", "R"] },
+    { "name": "strand_b", "type": "ordered_enum", "values": ["+", "-"] },
+    { "name": "end_distance_b", "type": "u64_decimal", "minimum": "0" },
+    { "name": "mate_role_b", "type": "ordered_enum", "values": ["R1", "R2"] },
+    { "name": "supplied_fragment_instances", "type": "u64_decimal", "minimum": "1" },
+    { "name": "status", "type": "literal", "value": "exact_unique_placement_pair_observation" }
+  ],
+  "row_constraints": [
+    "segment_a and segment_b identify different emitted linear unitigs.",
+    "Each mate has exactly one accepted zero-mismatch placement group and neither selected endpoint is tied.",
+    "Each end_distance is strictly less than the length in bases of its referenced emitted segment.",
+    "Coordinates, ends, and strands are anchored to the emitted canonical forward segment.",
+    "The serialized endpoint tuple is the typed lexical minimum of itself and complete-endpoint swap only; reverse complement is not a serialization symmetry.",
+    "No library orientation, insert span, gap, inferred adjacency, or qualification field is present."
+  ],
+  "file_constraints": [
+    "The literal header and column order are the columns array order.",
+    "No-observation output is the header followed by LF and no data rows.",
+    "Every lane_ordinal identifies a paired lane in the immutable input source catalogue in run.json.",
+    "The sum of supplied_fragment_instances equals cross_unitig_observation in pair_audit_summary.tsv.",
+    "Within each lane, the sum of supplied_fragment_instances equals that lane's cross_unitig_observation count in run.json."
+  ],
+  "sort_key": [
+    { "field": "lane_ordinal", "comparison": "numeric", "direction": "ascending" },
+    { "field": "segment_a", "comparison": "unsigned_byte_lexicographic", "direction": "ascending" },
+    { "field": "end_a", "comparison": "declared_enum_order", "direction": "ascending" },
+    { "field": "strand_a", "comparison": "declared_enum_order", "direction": "ascending" },
+    { "field": "end_distance_a", "comparison": "numeric", "direction": "ascending" },
+    { "field": "mate_role_a", "comparison": "declared_enum_order", "direction": "ascending" },
+    { "field": "segment_b", "comparison": "unsigned_byte_lexicographic", "direction": "ascending" },
+    { "field": "end_b", "comparison": "declared_enum_order", "direction": "ascending" },
+    { "field": "strand_b", "comparison": "declared_enum_order", "direction": "ascending" },
+    { "field": "end_distance_b", "comparison": "numeric", "direction": "ascending" },
+    { "field": "mate_role_b", "comparison": "declared_enum_order", "direction": "ascending" }
+  ]
+}

@@ -1,0 +1,27 @@
+{
+  "descriptor_schema_version": "1.0",
+  "artifact": "evaluation_truth/quality_events.tsv",
+  "artifact_schema_version": "1.0",
+  "format": "tsv",
+  "encoding": "UTF-8",
+  "line_ending": "LF",
+  "final_newline": true,
+  "delimiter": "TAB",
+  "header": true,
+  "empty_data_rows_allowed": true,
+  "columns": [
+    { "name": "schema_version", "type": "literal", "value": "1.0" },
+    { "name": "read_id", "type": "opaque_ascii_identifier" },
+    { "name": "observed_offset_zero_based", "type": "u64_decimal" },
+    {
+      "name": "event_kind",
+      "type": "enum",
+      "values": [
+        "independent_low_quality_q10",
+        "qc_censoring_substitution_linked_q10"
+      ]
+    },
+    { "name": "quality_phred", "type": "literal", "value": "10" }
+  ],
+  "sort_key": ["fragment/read emission order", "observed_offset_zero_based numeric"]
+}

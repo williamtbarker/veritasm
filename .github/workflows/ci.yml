@@ -1,0 +1,51 @@
+name: Checkpoint CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: checkpoint-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  verify:
+    name: ${{ matrix.os }} / Rust ${{ matrix.rust }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-24.04, macos-15]
+        rust: [stable, '1.85.0']
+    runs-on: ${{ matrix.os }}
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@93cb6efe18208431cddfb8368fd83d5badbf9bfd # v5.0.1
+      - uses: dtolnay/rust-toolchain@6c977a6ca4077a0ceb28ffbe03f59d46e9ac8772
+        with:
+          toolchain: ${{ matrix.rust }}
+          components: clippy, rustfmt
+      - name: Verify source and example
+        run: ./scripts/verify.sh
+
+  package:
+    name: Source archive integrity
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@93cb6efe18208431cddfb8368fd83d5badbf9bfd # v5.0.1
+      - name: Build deterministic source archive twice
+        run: |
+          set -euo pipefail
+          ./scripts/package_source.sh
+          mv veritasm-0.4.0-dev.1-source.zip "$RUNNER_TEMP/first.zip"
+          mv veritasm-0.4.0-dev.1-source.zip.sha256 "$RUNNER_TEMP/first.sha256"
+          ./scripts/package_source.sh
+          cmp "$RUNNER_TEMP/first.zip" veritasm-0.4.0-dev.1-source.zip
+          cmp "$RUNNER_TEMP/first.sha256" veritasm-0.4.0-dev.1-source.zip.sha256
+          sha256sum --check veritasm-0.4.0-dev.1-source.zip.sha256
+          unzip -tq veritasm-0.4.0-dev.1-source.zip

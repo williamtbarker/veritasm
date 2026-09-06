@@ -1,0 +1,25 @@
+{
+  "generator": "veritasm/examples/generate_synthetic.rs",
+  "generator_version": "1",
+  "seed_decimal": "7643211",
+  "scenario": "basic",
+  "fragments_decimal": "32",
+  "mode": "paired_end",
+  "read_length": 75,
+  "insert_length": 180,
+  "model_limitations": "Exact substitution-free reads from a deterministic xorshift64 genome model; not a biological or platform simulator.",
+  "files": [
+    {
+      "path": "reads_R1.fastq.gz",
+      "sha256": "d2ec464fe589517e13267745073362d4979148e72bf9c34b2b0ef97a0641ee2b"
+    },
+    {
+      "path": "reads_R2.fastq.gz",
+      "sha256": "987fbaba9b5d9746df03a502748217ce9e549e51b108feeb2ff57b294ae5e51d"
+    },
+    {
+      "path": "truth.fasta",
+      "sha256": "bb18f590fa3df6732a82c5a081672ce293323178a63cba171bf4868c3e11f523"
+    }
+  ]
+}

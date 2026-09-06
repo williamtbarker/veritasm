@@ -1,0 +1,16 @@
+{
+  "name": "determinism-regression",
+  "command": [
+    "cargo",
+    "test",
+    "--locked",
+    "--lib",
+    "experimental::multik_pipeline::tests::real_portfolio_is_byte_deterministic_and_explicitly_serial",
+    "--",
+    "--exact"
+  ],
+  "cwd": "/workspace/scratch/9b3fa4aeffd8/work/veritasm-github",
+  "utc": "2026-09-06T04:02:51.477847+00:00",
+  "exit_code": 0,
+  "seconds": 51.63
+}
