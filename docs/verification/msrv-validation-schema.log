@@ -1,6 +1,6 @@
-   Compiling veritasm v0.4.0-dev.1 (/workspace/scratch/9b3fa4aeffd8/work/veritasm-github)
+   Compiling veritasm v0.4.0-dev.1 (<verification-workspace>/work/veritasm-github)
     Finished `test` profile [unoptimized + debuginfo] target(s) in 1.61s
-     Running tests/validation_schema.rs (/workspace/scratch/9b3fa4aeffd8/build-msrv/debug/deps/validation_schema-a22a50006ee018a0)
+     Running tests/validation_schema.rs (<verification-workspace>/build-msrv/debug/deps/validation_schema-a22a50006ee018a0)
 
 running 2 tests
 test portable_dataset_path_schema_has_the_frozen_ascii_grammar ... ok

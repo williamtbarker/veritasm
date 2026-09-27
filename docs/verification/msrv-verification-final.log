@@ -2,7 +2,7 @@ rustc 1.85.0 (4d91de4e4 2025-02-17)
 cargo 1.85.0 (d73d2caf9 2024-12-31)
     Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.37s
     Finished `test` profile [unoptimized + debuginfo] target(s) in 0.33s
-     Running unittests src/lib.rs (/workspace/scratch/9b3fa4aeffd8/build-msrv/debug/deps/veritasm-3116bab34a7489b9)
+     Running unittests src/lib.rs (<verification-workspace>/build-msrv/debug/deps/veritasm-3116bab34a7489b9)
 
 running 545 tests
 test audit::tests::disabled_audit_builds_no_index_and_reports_that_fact ... ok
@@ -553,7 +553,7 @@ test experimental::quality_correction::tests::exhaustive_exact_three_base_domain
 
 test result: ok. 545 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 9.17s
 
-     Running unittests src/main.rs (/workspace/scratch/9b3fa4aeffd8/build-msrv/debug/deps/veritasm-df0cd9c154f746f2)
+     Running unittests src/main.rs (<verification-workspace>/build-msrv/debug/deps/veritasm-df0cd9c154f746f2)
 
 running 4 tests
 test tests::decimal_parser_rejects_signs_and_suffixes ... ok
@@ -563,13 +563,13 @@ test tests::unknown_arguments_become_one_line_typed_errors ... ok
 
 test result: ok. 4 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.01s
 
-     Running unittests src/bin/veritasm-evaluate.rs (/workspace/scratch/9b3fa4aeffd8/build-msrv/debug/deps/veritasm_evaluate-84ac036dd04b132b)
+     Running unittests src/bin/veritasm-evaluate.rs (<verification-workspace>/build-msrv/debug/deps/veritasm_evaluate-84ac036dd04b132b)
 
 running 0 tests
 
 test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
 
-     Running unittests src/bin/veritasm-multik.rs (/workspace/scratch/9b3fa4aeffd8/build-msrv/debug/deps/veritasm_multik-b5a6d83493be43f7)
+     Running unittests src/bin/veritasm-multik.rs (<verification-workspace>/build-msrv/debug/deps/veritasm_multik-b5a6d83493be43f7)
 
 running 4 tests
 test tests::decimal_parser_is_strict ... ok
@@ -579,13 +579,13 @@ test tests::malformed_k_is_typed ... ok
 
 test result: ok. 4 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
 
-     Running unittests src/bin/veritasm-simulate.rs (/workspace/scratch/9b3fa4aeffd8/build-msrv/debug/deps/veritasm_simulate-d591e091fdfe24ab)
+     Running unittests src/bin/veritasm-simulate.rs (<verification-workspace>/build-msrv/debug/deps/veritasm_simulate-d591e091fdfe24ab)
 
 running 0 tests
 
 test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
 
-     Running tests/cli.rs (/workspace/scratch/9b3fa4aeffd8/build-msrv/debug/deps/cli-334440bb908b5516)
+     Running tests/cli.rs (<verification-workspace>/build-msrv/debug/deps/cli-334440bb908b5516)
 
 running 25 tests
 test an_existing_destination_is_never_modified ... ok
@@ -616,14 +616,14 @@ test raw_transport_limit_boundaries_cover_file_stdin_plain_and_gzip ... ok
 
 test result: ok. 25 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 3.45s
 
-     Running tests/count_open_files.rs (/workspace/scratch/9b3fa4aeffd8/build-msrv/debug/deps/count_open_files-f0ff333c74c1b61e)
+     Running tests/count_open_files.rs (<verification-workspace>/build-msrv/debug/deps/count_open_files-f0ff333c74c1b61e)
 
 running 1 test
 test fan_in_merge_completes_with_low_descriptor_limit ... ok
 
 test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.04s
 
-     Running tests/graph_properties.rs (/workspace/scratch/9b3fa4aeffd8/build-msrv/debug/deps/graph_properties-65753be3e170b1bf)
+     Running tests/graph_properties.rs (<verification-workspace>/build-msrv/debug/deps/graph_properties-65753be3e170b1bf)
 
 running 4 tests
 test exact_k3_subgraphs_are_deterministic_and_conservative ... ok
@@ -633,7 +633,7 @@ test bounded_exhaustive_k4_oracle_covers_self_reverse_complement_edges ... ok
 
 test result: ok. 4 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 2.07s
 
-     Running tests/multik_cli.rs (/workspace/scratch/9b3fa4aeffd8/build-msrv/debug/deps/multik_cli-cee5c1c3cdfb3861)
+     Running tests/multik_cli.rs (<verification-workspace>/build-msrv/debug/deps/multik_cli-cee5c1c3cdfb3861)
 
 running 9 tests
 test destination_lease_and_existing_result_are_fail_closed ... ok
@@ -648,7 +648,7 @@ test paired_input_above_optional_evidence_cap_still_assembles_with_explicit_unav
 
 test result: ok. 9 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 4.29s
 
-     Running tests/stable_schema.rs (/workspace/scratch/9b3fa4aeffd8/build-msrv/debug/deps/stable_schema-fa33bd48d3f9af6c)
+     Running tests/stable_schema.rs (<verification-workspace>/build-msrv/debug/deps/stable_schema-fa33bd48d3f9af6c)
 
 running 5 tests
 test test_schema_validator_fails_closed_on_unknown_schema_surface ... ok
@@ -659,7 +659,7 @@ test emitted_stable_bundle_passes_independent_schema_and_cross_artifact_checks .
 
 test result: ok. 5 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.14s
 
-     Running tests/storage_integrity.rs (/workspace/scratch/9b3fa4aeffd8/build-msrv/debug/deps/storage_integrity-eb1548cc79280014)
+     Running tests/storage_integrity.rs (<verification-workspace>/build-msrv/debug/deps/storage_integrity-eb1548cc79280014)
 
 running 2 tests
 test public_spool_verifier_rejects_every_sampled_single_bit_mutation ... ok
@@ -667,7 +667,7 @@ test public_counter_rejects_every_sampled_single_bit_run_mutation ... ok
 
 test result: ok. 2 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.09s
 
-     Running tests/validation_cli.rs (/workspace/scratch/9b3fa4aeffd8/build-msrv/debug/deps/validation_cli-69c00663270ece54)
+     Running tests/validation_cli.rs (<verification-workspace>/build-msrv/debug/deps/validation_cli-69c00663270ece54)
 
 running 22 tests
 test evaluator_accepts_empty_fastq_only_for_zero_declared_fragments ... ok
@@ -695,11 +695,11 @@ test evaluator_accepts_one_megabase_exact_linear_truth_in_summary_mode ... ok
 
 test result: ok. 22 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 30.63s
 
-     Running tests/validation_schema.rs (/workspace/scratch/9b3fa4aeffd8/build-msrv/debug/deps/validation_schema-a22a50006ee018a0)
+     Running tests/validation_schema.rs (<verification-workspace>/build-msrv/debug/deps/validation_schema-a22a50006ee018a0)
 error: test failed, to rerun pass `--test validation_schema`
 
 Caused by:
-  could not execute process `/workspace/scratch/9b3fa4aeffd8/build-msrv/debug/deps/validation_schema-a22a50006ee018a0` (never executed)
+  could not execute process `<verification-workspace>/build-msrv/debug/deps/validation_schema-a22a50006ee018a0` (never executed)
 
 Caused by:
   Permission denied (os error 13)

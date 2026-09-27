@@ -148,7 +148,7 @@
     Checking aho-corasick v1.1.5
    Compiling zerocopy v0.8.56
     Checking rand_core v0.9.5
-    Checking veritasm v0.3.0-alpha.1 (/workspace/scratch/9b3fa4aeffd8/work/veritasm-github)
+    Checking veritasm v0.3.0-alpha.1 (<verification-workspace>/work/veritasm-github)
     Checking wait-timeout v0.2.1
     Checking regex-automata v0.4.18
     Checking predicates-core v1.0.10
