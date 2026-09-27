@@ -4,7 +4,7 @@
     "bash",
     "scripts/verify.sh"
   ],
-  "cwd": "/workspace/scratch/9b3fa4aeffd8/work/veritasm-github",
+  "cwd": "<verification-workspace>/work/veritasm-github",
   "utc": "2026-09-06T04:10:03.798362+00:00",
   "exit_code": 0,
   "seconds": 391.26

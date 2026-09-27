@@ -2,8 +2,8 @@
 
 These are historical Linux command transcripts, including failed attempts,
 captured before the macOS file-mode conversion fix. [Current status](../STATUS.md)
-records later verification. The original transcript bytes and source-input
-hashes are retained; they do not identify later source edits.
+records later verification. The command output and source-input hashes are retained, with the path
+normalization described below; they do not identify later source edits.
 
 - `initial-check`: compilation before checkpoint edits.
 - `stable-tests`: toolchain/dependency temporary-object failure; no test verdict.
@@ -22,7 +22,15 @@ hashes are retained; they do not identify later source edits.
   and Cargo inputs used by the final source checks. It deliberately excludes
   evolving evidence documents, the separately tested source packager, and its filename inventory.
 
-The `.json` companions record exact commands, exit codes, working directories,
-and durations. Historical absolute paths are execution provenance. Local helper
-scripts used to capture logs are not required to build or resume the project.
-Final ZIP integrity is checked separately against the same frozen input hashes.
+The `.json` companions record commands, exit codes, working directories, and
+durations. In these historical `.json` and `.log` records, the original absolute
+workspace root has been replaced consistently with `<verification-workspace>`.
+Relative checkout and build-directory relationships are preserved. This marker is
+an explanatory path token, not a literal directory to use when rerunning commands.
+No command option, test result, failure, timestamp, duration, or source-input hash
+was changed. Original records remain available in Git history before this
+normalization; these normalized files are not byte-identical raw transcripts.
+
+Local helper scripts used to capture logs are not required to build or resume the
+project. Final ZIP integrity is checked separately against the same frozen input
+hashes.

@@ -65,7 +65,7 @@ cargo 1.85.0 (d73d2caf9 2024-12-31)
    Compiling zerocopy v0.8.56
     Checking rand_core v0.9.5
     Checking regex-automata v0.4.18
-    Checking veritasm v0.4.0-dev.1 (/workspace/scratch/9b3fa4aeffd8/work/veritasm-github)
+    Checking veritasm v0.4.0-dev.1 (<verification-workspace>/work/veritasm-github)
     Checking wait-timeout v0.2.1
     Checking predicates-core v1.0.10
     Checking ppv-lite86 v0.2.21
@@ -143,7 +143,7 @@ cargo 1.85.0 (d73d2caf9 2024-12-31)
    Compiling num-traits v0.2.19
    Compiling regex-automata v0.4.18
    Compiling zerocopy v0.8.56
-error: failed to build archive at `/workspace/scratch/9b3fa4aeffd8/build-msrv/debug/deps/libregex_automata-1c1c749e18ddea7e.rlib`: failed to map object file: memory map must have a non-zero length
+error: failed to build archive at `<verification-workspace>/build-msrv/debug/deps/libregex_automata-1c1c749e18ddea7e.rlib`: failed to map object file: memory map must have a non-zero length
 
 error: could not compile `regex-automata` (lib) due to 1 previous error
 warning: build failed, waiting for other jobs to finish...

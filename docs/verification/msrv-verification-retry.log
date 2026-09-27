@@ -5,10 +5,10 @@ cargo 1.85.0 (d73d2caf9 2024-12-31)
     Checking bstr v1.13.1
     Checking predicates v3.1.4
     Checking assert_cmd v2.2.2
-    Checking veritasm v0.4.0-dev.1 (/workspace/scratch/9b3fa4aeffd8/work/veritasm-github)
+    Checking veritasm v0.4.0-dev.1 (<verification-workspace>/work/veritasm-github)
     Finished `dev` profile [unoptimized + debuginfo] target(s) in 43.74s
    Compiling regex-automata v0.4.18
-   Compiling veritasm v0.4.0-dev.1 (/workspace/scratch/9b3fa4aeffd8/work/veritasm-github)
+   Compiling veritasm v0.4.0-dev.1 (<verification-workspace>/work/veritasm-github)
    Compiling wait-timeout v0.2.1
    Compiling predicates-core v1.0.10
    Compiling regex v1.13.1
@@ -32,7 +32,7 @@ cargo 1.85.0 (d73d2caf9 2024-12-31)
    Compiling proptest v1.11.0
    Compiling assert_cmd v2.2.2
     Finished `test` profile [unoptimized + debuginfo] target(s) in 2m 12s
-     Running unittests src/lib.rs (/workspace/scratch/9b3fa4aeffd8/build-msrv/debug/deps/veritasm-3116bab34a7489b9)
+     Running unittests src/lib.rs (<verification-workspace>/build-msrv/debug/deps/veritasm-3116bab34a7489b9)
 
 running 545 tests
 test audit::tests::derived_read_workspace_is_checked_before_normalization ... ok
@@ -583,7 +583,7 @@ test experimental::quality_correction::tests::exhaustive_exact_three_base_domain
 
 test result: ok. 545 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 9.03s
 
-     Running unittests src/main.rs (/workspace/scratch/9b3fa4aeffd8/build-msrv/debug/deps/veritasm-df0cd9c154f746f2)
+     Running unittests src/main.rs (<verification-workspace>/build-msrv/debug/deps/veritasm-df0cd9c154f746f2)
 
 running 4 tests
 test tests::decimal_parser_rejects_signs_and_suffixes ... ok
@@ -593,17 +593,17 @@ test tests::help_and_version_remain_informational ... ok
 
 test result: ok. 4 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.01s
 
-     Running unittests src/bin/veritasm-evaluate.rs (/workspace/scratch/9b3fa4aeffd8/build-msrv/debug/deps/veritasm_evaluate-84ac036dd04b132b)
+     Running unittests src/bin/veritasm-evaluate.rs (<verification-workspace>/build-msrv/debug/deps/veritasm_evaluate-84ac036dd04b132b)
 
 running 0 tests
 
 test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
 
-     Running unittests src/bin/veritasm-multik.rs (/workspace/scratch/9b3fa4aeffd8/build-msrv/debug/deps/veritasm_multik-b5a6d83493be43f7)
+     Running unittests src/bin/veritasm-multik.rs (<verification-workspace>/build-msrv/debug/deps/veritasm_multik-b5a6d83493be43f7)
 error: test failed, to rerun pass `--bin veritasm-multik`
 
 Caused by:
-  could not execute process `/workspace/scratch/9b3fa4aeffd8/build-msrv/debug/deps/veritasm_multik-b5a6d83493be43f7` (never executed)
+  could not execute process `<verification-workspace>/build-msrv/debug/deps/veritasm_multik-b5a6d83493be43f7` (never executed)
 
 Caused by:
   Permission denied (os error 13)

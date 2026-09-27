@@ -2,7 +2,7 @@
    Compiling regex-automata v0.4.18
    Compiling clap v4.6.6
    Compiling rand_core v0.9.5
-   Compiling veritasm v0.4.0-dev.1 (/workspace/scratch/9b3fa4aeffd8/work/veritasm-github)
+   Compiling veritasm v0.4.0-dev.1 (<verification-workspace>/work/veritasm-github)
    Compiling zerocopy v0.8.56
    Compiling wait-timeout v0.2.1
    Compiling predicates-core v1.0.10
@@ -27,7 +27,7 @@
    Compiling proptest v1.11.0
    Compiling assert_cmd v2.2.2
     Finished `test` profile [unoptimized + debuginfo] target(s) in 1m 45s
-     Running unittests src/lib.rs (/workspace/scratch/9b3fa4aeffd8/build-target/debug/deps/veritasm-69c173ed08a9bed1)
+     Running unittests src/lib.rs (<verification-workspace>/build-target/debug/deps/veritasm-69c173ed08a9bed1)
 
 running 545 tests
 test audit::tests::derived_read_workspace_is_checked_before_normalization ... ok
@@ -593,7 +593,7 @@ failures:
 test result: FAILED. 544 passed; 1 failed; 0 ignored; 0 measured; 0 filtered out; finished in 9.32s
 
 error: test failed, to rerun pass `--lib`
-     Running unittests src/main.rs (/workspace/scratch/9b3fa4aeffd8/build-target/debug/deps/veritasm-00febd30db9ec924)
+     Running unittests src/main.rs (<verification-workspace>/build-target/debug/deps/veritasm-00febd30db9ec924)
 
 running 4 tests
 test tests::decimal_parser_rejects_signs_and_suffixes ... ok
@@ -603,13 +603,13 @@ test tests::unknown_arguments_become_one_line_typed_errors ... ok
 
 test result: ok. 4 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.01s
 
-     Running unittests src/bin/veritasm-evaluate.rs (/workspace/scratch/9b3fa4aeffd8/build-target/debug/deps/veritasm_evaluate-6313b50ebd1cbbb0)
+     Running unittests src/bin/veritasm-evaluate.rs (<verification-workspace>/build-target/debug/deps/veritasm_evaluate-6313b50ebd1cbbb0)
 
 running 0 tests
 
 test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
 
-     Running unittests src/bin/veritasm-multik.rs (/workspace/scratch/9b3fa4aeffd8/build-target/debug/deps/veritasm_multik-40f32be00406a846)
+     Running unittests src/bin/veritasm-multik.rs (<verification-workspace>/build-target/debug/deps/veritasm_multik-40f32be00406a846)
 
 running 4 tests
 test tests::decimal_parser_is_strict ... ok
@@ -619,13 +619,13 @@ test tests::malformed_k_is_typed ... ok
 
 test result: ok. 4 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.01s
 
-     Running unittests src/bin/veritasm-simulate.rs (/workspace/scratch/9b3fa4aeffd8/build-target/debug/deps/veritasm_simulate-a8306e3e17f2da5b)
+     Running unittests src/bin/veritasm-simulate.rs (<verification-workspace>/build-target/debug/deps/veritasm_simulate-a8306e3e17f2da5b)
 
 running 0 tests
 
 test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
 
-     Running tests/cli.rs (/workspace/scratch/9b3fa4aeffd8/build-target/debug/deps/cli-2753dfe322d13b70)
+     Running tests/cli.rs (<verification-workspace>/build-target/debug/deps/cli-2753dfe322d13b70)
 
 running 25 tests
 test active_destination_lease_fails_without_waiting_for_stdin_eof_or_creating_work ... ok
@@ -656,14 +656,14 @@ test raw_transport_limit_boundaries_cover_file_stdin_plain_and_gzip ... ok
 
 test result: ok. 25 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 3.49s
 
-     Running tests/count_open_files.rs (/workspace/scratch/9b3fa4aeffd8/build-target/debug/deps/count_open_files-7ca709fbf4ef85a1)
+     Running tests/count_open_files.rs (<verification-workspace>/build-target/debug/deps/count_open_files-7ca709fbf4ef85a1)
 
 running 1 test
 test fan_in_merge_completes_with_low_descriptor_limit ... ok
 
 test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.04s
 
-     Running tests/graph_properties.rs (/workspace/scratch/9b3fa4aeffd8/build-target/debug/deps/graph_properties-3c3ac942a22f2f35)
+     Running tests/graph_properties.rs (<verification-workspace>/build-target/debug/deps/graph_properties-3c3ac942a22f2f35)
 
 running 4 tests
 test exact_k3_subgraphs_are_deterministic_and_conservative ... ok
@@ -673,7 +673,7 @@ test bounded_exhaustive_k4_oracle_covers_self_reverse_complement_edges ... ok
 
 test result: ok. 4 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 1.83s
 
-     Running tests/multik_cli.rs (/workspace/scratch/9b3fa4aeffd8/build-target/debug/deps/multik_cli-fba894fc2333f4c8)
+     Running tests/multik_cli.rs (<verification-workspace>/build-target/debug/deps/multik_cli-fba894fc2333f4c8)
 
 running 9 tests
 test destination_lease_and_existing_result_are_fail_closed ... ok
@@ -688,7 +688,7 @@ test paired_input_above_optional_evidence_cap_still_assembles_with_explicit_unav
 
 test result: ok. 9 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 4.73s
 
-     Running tests/stable_schema.rs (/workspace/scratch/9b3fa4aeffd8/build-target/debug/deps/stable_schema-fd323db3f9855af6)
+     Running tests/stable_schema.rs (<verification-workspace>/build-target/debug/deps/stable_schema-fd323db3f9855af6)
 
 running 5 tests
 test test_schema_validator_fails_closed_on_unknown_schema_surface ... ok
@@ -699,7 +699,7 @@ test semantic_checker_rejects_na_order_and_cross_artifact_identifier_mutations .
 
 test result: ok. 5 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.14s
 
-     Running tests/storage_integrity.rs (/workspace/scratch/9b3fa4aeffd8/build-target/debug/deps/storage_integrity-61026d203d47586b)
+     Running tests/storage_integrity.rs (<verification-workspace>/build-target/debug/deps/storage_integrity-61026d203d47586b)
 
 running 2 tests
 test public_counter_rejects_every_sampled_single_bit_run_mutation ... ok
@@ -707,7 +707,7 @@ test public_spool_verifier_rejects_every_sampled_single_bit_mutation ... ok
 
 test result: ok. 2 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.06s
 
-     Running tests/validation_cli.rs (/workspace/scratch/9b3fa4aeffd8/build-target/debug/deps/validation_cli-1503ca23412de0b3)
+     Running tests/validation_cli.rs (<verification-workspace>/build-target/debug/deps/validation_cli-1503ca23412de0b3)
 
 running 22 tests
 test evaluator_accepts_empty_fastq_only_for_zero_declared_fragments ... ok
@@ -735,7 +735,7 @@ test evaluator_accepts_one_megabase_exact_linear_truth_in_summary_mode ... ok
 
 test result: ok. 22 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 30.29s
 
-     Running tests/validation_schema.rs (/workspace/scratch/9b3fa4aeffd8/build-target/debug/deps/validation_schema-4e4cca2cb216ce88)
+     Running tests/validation_schema.rs (<verification-workspace>/build-target/debug/deps/validation_schema-4e4cca2cb216ce88)
 
 running 2 tests
 test portable_dataset_path_schema_has_the_frozen_ascii_grammar ... ok
@@ -743,7 +743,7 @@ test emitted_json_and_tsv_artifacts_conform_to_shipped_schemas ... ok
 
 test result: ok. 2 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.05s
 
-     Running unittests examples/evaluate_exact_truth.rs (/workspace/scratch/9b3fa4aeffd8/build-target/debug/examples/evaluate_exact_truth-077512a489ccef25)
+     Running unittests examples/evaluate_exact_truth.rs (<verification-workspace>/build-target/debug/examples/evaluate_exact_truth-077512a489ccef25)
 
 running 2 tests
 test tests::exact_positions_include_overlaps ... ok
@@ -751,13 +751,13 @@ test tests::reverse_complement_is_correct ... ok
 
 test result: ok. 2 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
 
-     Running unittests examples/generate_synthetic.rs (/workspace/scratch/9b3fa4aeffd8/build-target/debug/examples/generate_synthetic-d2df1c0bce33d363)
+     Running unittests examples/generate_synthetic.rs (<verification-workspace>/build-target/debug/examples/generate_synthetic-d2df1c0bce33d363)
 
 running 0 tests
 
 test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
 
-     Running unittests examples/profile_indexed_mapper.rs (/workspace/scratch/9b3fa4aeffd8/build-target/debug/examples/profile_indexed_mapper-28c8b09c592f17aa)
+     Running unittests examples/profile_indexed_mapper.rs (<verification-workspace>/build-target/debug/examples/profile_indexed_mapper-28c8b09c592f17aa)
 
 running 0 tests
 

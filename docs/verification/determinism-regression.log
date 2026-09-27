@@ -1,6 +1,6 @@
-   Compiling veritasm v0.4.0-dev.1 (/workspace/scratch/9b3fa4aeffd8/work/veritasm-github)
+   Compiling veritasm v0.4.0-dev.1 (<verification-workspace>/work/veritasm-github)
     Finished `test` profile [unoptimized + debuginfo] target(s) in 51.01s
-     Running unittests src/lib.rs (/workspace/scratch/9b3fa4aeffd8/build-target/debug/deps/veritasm-69c173ed08a9bed1)
+     Running unittests src/lib.rs (<verification-workspace>/build-target/debug/deps/veritasm-69c173ed08a9bed1)
 
 running 1 test
 test experimental::multik_pipeline::tests::real_portfolio_is_byte_deterministic_and_explicitly_serial ... ok

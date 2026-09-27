@@ -61,7 +61,7 @@
    Compiling zerocopy v0.8.56
     Checking regex-automata v0.4.18
     Checking rand_core v0.9.5
-    Checking veritasm v0.4.0-dev.1 (/workspace/scratch/9b3fa4aeffd8/check-clean/veritasm-github)
+    Checking veritasm v0.4.0-dev.1 (<verification-workspace>/check-clean/veritasm-github)
     Checking wait-timeout v0.2.1
     Checking predicates-core v1.0.10
     Checking ppv-lite86 v0.2.21

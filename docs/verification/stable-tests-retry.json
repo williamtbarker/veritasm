@@ -8,7 +8,7 @@
     "--all-features",
     "--no-fail-fast"
   ],
-  "cwd": "/workspace/scratch/9b3fa4aeffd8/work/veritasm-github",
+  "cwd": "<verification-workspace>/work/veritasm-github",
   "utc": "2026-09-06T04:00:01.339873+00:00",
   "exit_code": 101,
   "seconds": 155.51
